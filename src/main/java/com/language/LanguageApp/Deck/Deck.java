@@ -2,6 +2,7 @@ package com.language.LanguageApp.Deck;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.language.LanguageApp.Card.Card;
 import com.language.LanguageApp.Users.Users;
 
@@ -13,35 +14,41 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="deck")
+@Table(name = "deck")
 public class Deck {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long deckId;
-    
-    @Column(nullable= true)
+
+    @Column(nullable = true)
     private String language;
 
     @Column(nullable = true)
     private String description;
 
-    @OneToMany(mappedBy = "deck", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Card> cards;
+    //Used to connect decks to user
+    @ManyToMany(mappedBy = "decks")
+    @JsonIgnoreProperties("decks") 
+    private List<Users> users;
 
-    // @Column(nullable = true)
-    @ManyToOne
-    @JoinColumn(name = "users_id")
-    private Users users;
-    
+    //Link to connect decks to cards
+    @ManyToMany
+    @JoinTable(name = "deck_cards", joinColumns = @JoinColumn(name = "deck_id"), inverseJoinColumns = @JoinColumn(name = "card_id"))
+    @JsonIgnoreProperties("decks")
+    private List<Card> cards; 
+
+
     public Deck() {
     }
 
-    public Deck(Long deckId, String language, String description, List<Card> cards, Users users) {
+    public Deck(Long deckId, String language, String description, List<Card> cards, List<Users> users) {
         this.deckId = deckId;
         this.language = language;
         this.description = description;
@@ -49,7 +56,7 @@ public class Deck {
         this.users = users;
     }
 
-    public Deck(String language, String description, List<Card> cards, Users users) {
+    public Deck(String language, String description, List<Card> cards, List<Users> users) {
         this.language = language;
         this.description = description;
         this.cards = cards;
@@ -88,14 +95,12 @@ public class Deck {
         this.cards = cards;
     }
 
-    public Users getUsers() {
+    public List<Users> getUsers() {
         return this.users;
     }
 
-    public void setUsers(Users users) {
+    public void setUsers(List<Users> users) {
         this.users = users;
     }
-
-
 
 }
