@@ -5,8 +5,7 @@ import java.util.List;
 
 
 public interface CardRepository extends JpaRepository<Card, Long> {
-    // List<Card> findByLanguage(String language);
-    // List<Card> findByStatus(String status);
-    // List<Card> findByTranslation(String translation);
+    List<Card> findByLanguage(String language);
+    List<Card> findByStatus(String status);
 
 }
