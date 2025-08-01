@@ -18,24 +18,28 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+
+
 
 @Entity
 @Table(name = "users")
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long usersId;
 
-    @Column(nullable = false)
+    @Column(name = "first_name",nullable = false)
     private String firstName;
 
-    @Column(nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(nullable = false)
+    @Column(name = "role", nullable = false)
     private String role;
-
-    @Column(nullable = false)
+    
+    @Column(name = "language",nullable = false)
     private String language;
 
     // Link to connect users to decks

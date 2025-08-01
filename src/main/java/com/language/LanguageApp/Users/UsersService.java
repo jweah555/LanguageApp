@@ -18,7 +18,7 @@ public class UsersService {
     private UsersRepository usersRepository;
 
     
-    public List<Users> getUsers() {
+    public List<Users> getAllUsers() {
         List<Users> users = usersRepository.findAll();
         if (users.isEmpty()) {
             throw new ResourceNotFoundException("No users found");

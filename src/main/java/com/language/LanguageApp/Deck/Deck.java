@@ -25,12 +25,13 @@ import jakarta.persistence.Table;
 public class Deck {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "deck_id")
     private Long deckId;
 
-    @Column(nullable = true)
+    @Column(name = "language",nullable = true)
     private String language;
 
-    @Column(nullable = true)
+    @Column(name = "name",nullable = true)
     private String description;
 
     //Used to connect decks to user

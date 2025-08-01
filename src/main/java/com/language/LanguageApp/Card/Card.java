@@ -20,18 +20,19 @@ import jakarta.persistence.ManyToOne;
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "card_id")
     private Long cardId;
     
-    @Column(nullable = false)
+    @Column(name = "language",nullable = false)
     private String language;
 
-    @Column(nullable = true)
+    @Column(name = "status",nullable = true)
     private String status;
 
-    @Column(nullable = false)
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(nullable = false)
+    @Column(name = "translation", nullable = false)
     private String translation;
 
 
