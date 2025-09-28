@@ -19,27 +19,32 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
 @RestController
 public class UsersController {
-    @Autowired
-    private UsersService usersService;
+    private final UsersRepository usersRepository;
+    private final UsersService usersService;
 
-    @GetMapping("/users") 
-    public ResponseEntity<List<Users>> getAllUsers(){
+    @Autowired
+    public UsersController(UsersRepository usersRepository, UsersService usersService) {
+        this.usersRepository = usersRepository;
+        this.usersService = usersService;
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<Users>> getAllUsers() {
         List<Users> users = usersService.getAllUsers();
 
         return ResponseEntity.ok(users);
-        
+
     }
 
     @PostMapping("/users")
     public ResponseEntity<Users> addUser(@RequestBody Users users) {
         Users createdUser = usersService.addUser(users);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser); 
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 
-    @GetMapping("users/{userId}") 
+    @GetMapping("users/{userId}")
     public ResponseEntity<Users> getUserById(@PathVariable("userId") Long userId) {
         Users user = usersService.getUsersById(userId);
         return ResponseEntity.ok(user);
@@ -67,8 +72,13 @@ public class UsersController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/{userName}")
+    public Users getUserByUserName(@PathVariable String userName) {
+        return usersService.getUsersByUserName(userName);
+    }
+
     @PutMapping("users/{userId}")
-    public ResponseEntity<Users> updateUserById(@PathVariable("userId") Long userId, @RequestBody Users updatedUser){
+    public ResponseEntity<Users> updateUserById(@PathVariable("userId") Long userId, @RequestBody Users updatedUser) {
         Users user = usersService.getUsersById(userId);
         if (user == null) {
             return ResponseEntity.notFound().build();
@@ -82,6 +92,14 @@ public class UsersController {
         usersService.updateUsers(userId, updatedUser);
 
         return ResponseEntity.ok(user);
-    }  
+    }
+
+    // @PostMapping("/register")
+    // public ResponseEntity<Users> registerUser(@RequestBody Users users) {
+    // Users newUser = usersRepository.save(users);
+
+    // return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
+
+    // }
 
 }

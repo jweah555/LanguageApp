@@ -33,6 +33,12 @@ public class Users {
     @Column(name = "first_name",nullable = false)
     private String firstName;
 
+    @Column(name = "user_name", nullable = false)
+    private String userName;
+
+    @Column(name = "password",nullable = false)
+    private String password;
+
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
@@ -133,4 +139,19 @@ public class Users {
         this.cards = cards;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserName() {
+        return this.userName;
+    }
 }
