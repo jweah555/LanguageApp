@@ -1,6 +1,6 @@
 package com.language.LanguageApp.Deck;
 
-import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.language.LanguageApp.Card.Card;
@@ -34,22 +34,26 @@ public class Deck {
     @Column(name = "name",nullable = true)
     private String description;
 
+    //True for the deck auto-created for a user to hold cards they like, outside of any custom deck
+    @Column(name = "is_default", nullable = false)
+    private boolean isDefault = false;
+
     //Used to connect decks to user
     @ManyToMany(mappedBy = "decks")
-    @JsonIgnoreProperties("decks") 
-    private List<Users> users;
+    @JsonIgnoreProperties("decks")
+    private Set<Users> users;
 
     //Link to connect decks to cards
     @ManyToMany
     @JoinTable(name = "deck_cards", joinColumns = @JoinColumn(name = "deck_id"), inverseJoinColumns = @JoinColumn(name = "card_id"))
     @JsonIgnoreProperties("decks")
-    private List<Card> cards; 
+    private Set<Card> cards;
 
 
     public Deck() {
     }
 
-    public Deck(Long deckId, String language, String description, List<Card> cards, List<Users> users) {
+    public Deck(Long deckId, String language, String description, Set<Card> cards, Set<Users> users) {
         this.deckId = deckId;
         this.language = language;
         this.description = description;
@@ -57,7 +61,7 @@ public class Deck {
         this.users = users;
     }
 
-    public Deck(String language, String description, List<Card> cards, List<Users> users) {
+    public Deck(String language, String description, Set<Card> cards, Set<Users> users) {
         this.language = language;
         this.description = description;
         this.cards = cards;
@@ -88,20 +92,41 @@ public class Deck {
         this.description = description;
     }
 
-    public List<Card> getCards() {
+    public boolean isDefault() {
+        return this.isDefault;
+    }
+
+    public void setDefault(boolean isDefault) {
+        this.isDefault = isDefault;
+    }
+
+    public Set<Card> getCards() {
         return this.cards;
     }
 
-    public void setCards(List<Card> cards) {
+    public void setCards(Set<Card> cards) {
         this.cards = cards;
     }
 
-    public List<Users> getUsers() {
+    public Set<Users> getUsers() {
         return this.users;
     }
 
-    public void setUsers(List<Users> users) {
+    public void setUsers(Set<Users> users) {
         this.users = users;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Deck deck = (Deck) o;
+        return deckId != null && deckId.equals(deck.deckId);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 
 }

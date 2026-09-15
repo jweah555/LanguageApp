@@ -1,6 +1,6 @@
 package com.language.LanguageApp.Users;
 
-import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -47,12 +47,12 @@ public class Users {
     @ManyToMany
     @JoinTable(name = "users_decks", joinColumns = @JoinColumn(name = "users_id"), inverseJoinColumns = @JoinColumn(name = "deck_id"))
     @JsonIgnoreProperties("users") // Prevents recursion during JSON serialization
-    private List<Deck> decks;
+    private Set<Deck> decks;
 
     public Users() {
     }
 
-    public Users(Long usersId, String firstName, String lastName, String role, String language, List<Deck> decks) {
+    public Users(Long usersId, String firstName, String lastName, String role, String language, Set<Deck> decks) {
         this.usersId = usersId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -61,7 +61,7 @@ public class Users {
         this.decks = decks;
     }
 
-    public Users(String firstName, String lastName, String role, String language, List<Deck> decks) {
+    public Users(String firstName, String lastName, String role, String language, Set<Deck> decks) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
@@ -109,11 +109,11 @@ public class Users {
         this.language = language;
     }
 
-    public List<Deck> getDecks() {
+    public Set<Deck> getDecks() {
         return this.decks;
     }
 
-    public void setDeck(List<Deck> decks) {
+    public void setDeck(Set<Deck> decks) {
         this.decks = decks;
     }
 
@@ -131,5 +131,18 @@ public class Users {
 
     public String getUserName() {
         return this.userName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Users users = (Users) o;
+        return usersId != null && usersId.equals(users.usersId);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }
