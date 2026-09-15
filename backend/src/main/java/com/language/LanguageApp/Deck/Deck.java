@@ -69,7 +69,7 @@ public class Deck {
         this.users = users;
     }
 
-    public Long getdeckId() {
+    public Long getDeckId() {
         return this.deckId;
     }
 
