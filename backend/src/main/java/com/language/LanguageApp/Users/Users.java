@@ -1,5 +1,6 @@
 package com.language.LanguageApp.Users;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -47,7 +48,7 @@ public class Users {
     @ManyToMany
     @JoinTable(name = "users_decks", joinColumns = @JoinColumn(name = "users_id"), inverseJoinColumns = @JoinColumn(name = "deck_id"))
     @JsonIgnoreProperties("users") // Prevents recursion during JSON serialization
-    private Set<Deck> decks;
+    private Set<Deck> decks = new HashSet<>();
 
     public Users() {
     }
@@ -115,6 +116,16 @@ public class Users {
 
     public void setDeck(Set<Deck> decks) {
         this.decks = decks;
+    }
+
+    public void addDeck(Deck deck) {
+        this.decks.add(deck);
+        deck.getUsers().add(this);
+    }
+
+    public void removeDeck(Deck deck) {
+        this.decks.remove(deck);
+        deck.getUsers().remove(this);
     }
 
     public void setPassword(String password) {

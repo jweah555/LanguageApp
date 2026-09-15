@@ -1,8 +1,6 @@
 package com.language.LanguageApp.Users;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -75,12 +73,9 @@ public class UsersService {
         personalDeck.setLanguage(newUser.getLanguage());
         personalDeck.setDescription("Liked Cards");
         personalDeck.setDefault(true);
-        personalDeck.setCards(new HashSet<>());
         Deck savedPersonalDeck = deckRepository.save(personalDeck);
 
-        Set<Deck> decks = new HashSet<>();
-        decks.add(savedPersonalDeck);
-        newUser.setDeck(decks);
+        newUser.addDeck(savedPersonalDeck);
 
         return usersRepository.save(newUser);
     }

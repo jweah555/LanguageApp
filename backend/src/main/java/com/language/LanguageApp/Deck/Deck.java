@@ -1,5 +1,6 @@
 package com.language.LanguageApp.Deck;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -41,13 +42,13 @@ public class Deck {
     //Used to connect decks to user
     @ManyToMany(mappedBy = "decks")
     @JsonIgnoreProperties("decks")
-    private Set<Users> users;
+    private Set<Users> users = new HashSet<>();
 
     //Link to connect decks to cards
     @ManyToMany
     @JoinTable(name = "deck_cards", joinColumns = @JoinColumn(name = "deck_id"), inverseJoinColumns = @JoinColumn(name = "card_id"))
     @JsonIgnoreProperties("decks")
-    private Set<Card> cards;
+    private Set<Card> cards = new HashSet<>();
 
 
     public Deck() {
@@ -106,6 +107,16 @@ public class Deck {
 
     public void setCards(Set<Card> cards) {
         this.cards = cards;
+    }
+
+    public void addCard(Card card) {
+        this.cards.add(card);
+        card.getDecks().add(this);
+    }
+
+    public void removeCard(Card card) {
+        this.cards.remove(card);
+        card.getDecks().remove(this);
     }
 
     public Set<Users> getUsers() {

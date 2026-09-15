@@ -1,5 +1,6 @@
 package com.language.LanguageApp.Card;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -35,7 +36,7 @@ public class Card {
     //Link to connect cards to deck
     @ManyToMany(mappedBy = "cards")
     @JsonIgnoreProperties("cards")
-    private Set<Deck> decks;
+    private Set<Deck> decks = new HashSet<>();
 
     public Card() {
     }
