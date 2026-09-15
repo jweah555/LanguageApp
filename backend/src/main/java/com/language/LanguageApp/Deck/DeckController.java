@@ -24,65 +24,38 @@ public class DeckController {
 
     @GetMapping("/decks")
     public ResponseEntity<List<Deck>> getAllDecks() {
-        try {
-            List<Deck> decks = deckService.getAllDecks();
-            return ResponseEntity.ok(decks);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
-
+        List<Deck> decks = deckService.getAllDecks();
+        return ResponseEntity.ok(decks);
     }
 
     @PostMapping("/decks")
     public ResponseEntity<Deck> addDeck(@RequestBody Deck deck) {
-        try {
-            Deck createdDeck = deckService.addDeck(deck);
-            return ResponseEntity.status(HttpStatus.CREATED).body(createdDeck);
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
-
+        Deck createdDeck = deckService.addDeck(deck);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdDeck);
     }
 
     @GetMapping("/decks/{deckId}")
     public ResponseEntity<Deck> getDeckById(@PathVariable("deckId") Long deckId) {
-        try {
-            Deck deck = deckService.getDeckById(deckId);
-            return ResponseEntity.ok(deck);
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
+        Deck deck = deckService.getDeckById(deckId);
+        return ResponseEntity.ok(deck);
     }
 
     @GetMapping("/decks/language/{language}")
     public ResponseEntity<List<Deck>> getDeckByLanguage(@PathVariable("language") String language) {
-        try {
-            List<Deck> decks = deckService.getDeckByLanguage(language);
-            return ResponseEntity.ok(decks);
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
-
+        List<Deck> decks = deckService.getDeckByLanguage(language);
+        return ResponseEntity.ok(decks);
     }
 
     @PutMapping("/decks/{deckId}")
     public ResponseEntity<Deck> updateDeckById(@PathVariable("deckId") Long deckId, @RequestBody Deck updatedDeck) {
-        try {
-            Deck newDeck = deckService.updateDeck(deckId, updatedDeck);
-            return ResponseEntity.ok(newDeck);
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
+        Deck newDeck = deckService.updateDeck(deckId, updatedDeck);
+        return ResponseEntity.ok(newDeck);
     }
 
     @DeleteMapping("/decks/{deckId}")
     public ResponseEntity<Void> deleteById(@PathVariable("deckId") Long deckId) {
-        try {
-            deckService.deleteDeck(deckId);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
+        deckService.deleteDeck(deckId);
+        return ResponseEntity.noContent().build();
     }
 
 }

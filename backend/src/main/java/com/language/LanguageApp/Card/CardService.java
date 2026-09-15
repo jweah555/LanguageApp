@@ -5,7 +5,6 @@ import com.language.LanguageApp.Users.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.client.ResourceAccessException;
 
 import com.language.LanguageApp.BadRequestException;
 import com.language.LanguageApp.ResourceNotFoundException;
@@ -21,20 +20,20 @@ public class CardService {
     public List<Card> getAllCards(){
         List<Card> cards = cardRepository.findAll();
         if (cards.isEmpty()) {
-            throw new ResourceAccessException("Card not found");
+            throw new ResourceNotFoundException("No cards found");
         }
         return cards;
     }
 
     public Card getCardById(@PathVariable long cardId) {
-        Card card = cardRepository.findById(cardId).orElseThrow(() -> new ResourceAccessException("Card with ID " + cardId + " not found"));
+        Card card = cardRepository.findById(cardId).orElseThrow(() -> new ResourceNotFoundException("Card with ID " + cardId + " not found"));
         return card;
     }
 
     public List<Card> getCardsByLanguage(String language) {
         List<Card> cards = cardRepository.findByLanguage(language);
         if(cards.isEmpty()) {
-            throw new ResourceAccessException("No card found");
+            throw new ResourceNotFoundException("No card found");
         }
         return cards;
     }
@@ -49,7 +48,7 @@ public class CardService {
 
     public Card addCard(Card card) {
         if (card == null) {
-            throw new ResourceNotFoundException("Card object not found");
+            throw new BadRequestException("Card object must not be null");
         }
     return cardRepository.save(card);
 
@@ -62,15 +61,14 @@ public class CardService {
         existingCard.setLanguage(updatedCard.getLanguage());
         existingCard.setStatus(updatedCard.getStatus());
         existingCard.setTranslation(updatedCard.getTranslation());
-        existingCard.setUsers(updatedCard.getUser());
 
         return cardRepository.save(existingCard);
     }
 
     public void deleteCardById(Long cardId) {
-       
+
         if(!cardRepository.existsById(cardId)){
-            throw new BadRequestException("No card found");
+            throw new ResourceNotFoundException("No card found");
         }
         cardRepository.deleteById(cardId);
     }
