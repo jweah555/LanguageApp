@@ -1,8 +1,7 @@
 package com.language.LanguageApp.Users;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.catalina.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,13 +10,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.language.LanguageApp.ResourceNotFoundException;
 import com.language.LanguageApp.BadRequestException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import com.language.LanguageApp.Deck.Deck;
+import com.language.LanguageApp.Deck.DeckRepository;
 
 @Service
 public class UsersService {
     @Autowired
     private UsersRepository usersRepository;
+
+    @Autowired
+    private DeckRepository deckRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -65,9 +67,21 @@ public class UsersService {
         if (users == null) {
             throw new BadRequestException("User object must not be null");
         }
+        users.setPassword(passwordEncoder.encode(users.getPassword()));
         Users newUser = usersRepository.save(users);
-        newUser.setPassword(passwordEncoder.encode(users.getPassword()));
-        return usersRepository.save(users);
+
+        Deck personalDeck = new Deck();
+        personalDeck.setLanguage(newUser.getLanguage());
+        personalDeck.setDescription("Liked Cards");
+        personalDeck.setDefault(true);
+        personalDeck.setCards(new ArrayList<>());
+        Deck savedPersonalDeck = deckRepository.save(personalDeck);
+
+        List<Deck> decks = new ArrayList<>();
+        decks.add(savedPersonalDeck);
+        newUser.setDeck(decks);
+
+        return usersRepository.save(newUser);
     }
 
     public Users updateUsers(Long userId, Users updatedUserData) {
@@ -77,7 +91,6 @@ public class UsersService {
         existingUser.setLastName(updatedUserData.getLastName());
         existingUser.setRole(updatedUserData.getRole());
         existingUser.setLanguage(updatedUserData.getLanguage());
-        existingUser.setCards(updatedUserData.getCards());
         existingUser.setDeck(updatedUserData.getDecks());
 
         return usersRepository.save(existingUser);

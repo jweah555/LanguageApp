@@ -3,11 +3,9 @@ package com.language.LanguageApp.Users;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.language.LanguageApp.Card.Card;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.language.LanguageApp.Deck.Deck;
 
-import jakarta.annotation.Generated;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,11 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-
-
 
 @Entity
 @Table(name = "users")
@@ -37,6 +31,7 @@ public class Users {
     private String userName;
 
     @Column(name = "password",nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Column(name = "last_name", nullable = false)
@@ -54,33 +49,24 @@ public class Users {
     @JsonIgnoreProperties("users") // Prevents recursion during JSON serialization
     private List<Deck> decks;
 
-    // Link to connect users to cards
-    @ManyToMany
-    @JoinTable(name = "user_cards", joinColumns = @JoinColumn(name = "users_id"), inverseJoinColumns = @JoinColumn(name = "card_id"))
-    @JsonIgnoreProperties("users")
-    private List<Card> cards; // Use plural for clarity
-
     public Users() {
     }
 
-    public Users(Long usersId, String firstName, String lastName, String role, String language, List<Deck> decks,
-            List<Card> cards) {
+    public Users(Long usersId, String firstName, String lastName, String role, String language, List<Deck> decks) {
         this.usersId = usersId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
         this.language = language;
         this.decks = decks;
-        this.cards = cards;
     }
 
-    public Users(String firstName, String lastName, String role, String language, List<Deck> decks, List<Card> cards) {
+    public Users(String firstName, String lastName, String role, String language, List<Deck> decks) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
         this.language = language;
         this.decks = decks;
-        this.cards = cards;
     }
 
     public Long getUsersId() {
@@ -129,14 +115,6 @@ public class Users {
 
     public void setDeck(List<Deck> decks) {
         this.decks = decks;
-    }
-
-    public List<Card> getCards() {
-        return this.cards;
-    }
-
-    public void setCards(List<Card> cards) {
-        this.cards = cards;
     }
 
     public void setPassword(String password) {

@@ -1,0 +1,13 @@
+spring.application.name=LanguageApp
+server.port=8080
+
+# Neon JDBC Connection
+# Copy this file to application.properties (already gitignored) and fill in real values,
+# or set these as OS/shell environment variables instead.
+spring.datasource.url=jdbc:postgresql://<host>/<database>?sslmode=require
+spring.datasource.username=<username>
+spring.datasource.password=<password>
+
+# JPA/Hibernate Config
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.hibernate.ddl-auto=update
