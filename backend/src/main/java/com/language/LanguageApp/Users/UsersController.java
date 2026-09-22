@@ -86,7 +86,6 @@ public class UsersController {
         user.setFirstName(updatedUser.getFirstName());
         user.setLanguage(updatedUser.getLanguage());
         user.setRole(updatedUser.getRole());
-        user.setCards(updatedUser.getCards());
         user.setDeck(updatedUser.getDecks());
 
         usersService.updateUsers(userId, updatedUser);

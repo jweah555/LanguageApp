@@ -1,0 +1,176 @@
+*,
+*::befor,
+*::after {
+  box-sizing: border-box;
+}
+
+header {
+  display: flex;
+  font-family: "Roboto Flex", sans-serif;
+  width: 100;
+  justify-content: center;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0.5rem 2rem 0 2em;
+  background-color: #fbfbfb;
+}
+
+header ul {
+  display: flex;
+  gap: 2rem;
+}
+
+ul {
+  /* list-style-type: none; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .main-option {
+  gap: 3rem;
+}
+
+.main-option > li:hover {
+  background-color: #ffd700;
+  border-radius: 1rem;
+  padding: 0.5rem;
+} */
+
+.main-option > li {
+  gap: 3rem;
+  padding: 0.5rem; /* fixed */
+  transition: background-color 0.2s ease, border-radius 0.2s ease,
+    transform 0.2s ease;
+}
+
+.main-option > li:hover {
+  background-color: #ffd700;
+  border-radius: 1rem;
+  cursor: pointer;
+  transform: scale(1.05); /* slightly enlarges visually */
+}
+
+.login {
+  padding: 0.5rem; /* fixed */
+  transition: background-color 0.2s ease, border-radius 0.2s ease,
+    transform 0.2s ease;
+  list-style-type: none;
+  cursor: pointer;
+}
+
+.login:hover {
+  background-color: #ffd700;
+  border-radius: 1rem;
+  transform: scale(1.05);
+}
+
+.getStarted {
+  background-color: black;
+  color: white;
+  padding: 0.65rem;
+  border-radius: 8px;
+  list-style-type: none;
+  cursor: pointer;
+
+  transition: background-color 0.2s ease, border-radius 0.2s ease;
+}
+
+.getStarted:hover {
+  background-color: #ffd700;
+  color: black;
+  /* border-style: solid; */
+  transform: scale(1.05);
+}
+
+.ham-Icon {
+  display: none;
+}
+
+.sub-nav {
+  display: none;
+}
+
+.ham {
+  display: none;
+}
+
+header button {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .main-option,
+  .login,
+  .getStarted {
+    display: none;
+    /* visibility: hidden; */
+  }
+
+  .ham {
+    display: block;
+    height: 3rem;
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0rem;
+    padding-bottom: 0rem;
+  }
+
+  header ul {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    font-size: 1.1rem;
+  }
+
+  .sub-nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: "Delius", cursive;
+    font-weight: 800;
+    font-style: normal;
+  }
+
+  /* .ham-Icon {
+    display: block;
+    height: 3rem;
+   
+  } */
+
+  /* header ul {
+    display: none;
+  } */
+
+  header button {
+    display: block;
+    height: 2.2rem;
+    width: 5rem;
+    border-radius: 8px;
+    border-width: 1px;
+    background-color: #77bef0;
+    z-index: 10;
+  }
+
+  header button:hover {
+    background-color: #ffcb61;
+  }
+
+  header div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  header > ul:last-of-type {
+    display: none;
+  }
+  /* 
+  header > ul {
+    display: none;
+  } */
+}

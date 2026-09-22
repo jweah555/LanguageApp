@@ -1,0 +1,92 @@
+*,
+*::befor,
+*::after {
+  box-sizing: border-box;
+}
+
+.deck-main {
+  display: flex;
+  justify-content: center;
+  height: 60vh;
+  align-items: center;
+}
+
+.deck-main img {
+  width: 1.9rem;
+}
+
+.deck-section {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.deck-section h3 {
+  font-size: 1.8rem;
+}
+
+.card {
+  /* border-style: solid; */
+  /* border-radius: 10px; */
+  /* border-width: 1px; */
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  background: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+
+  /* rounded corners look cleaner */
+  /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); */
+  /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.due-new {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.due-new span {
+  background-color: #ffe99a;
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.bottom-options {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.card p {
+  font-size: 1.5rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.translation {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  width: 80%;
+  display: flex;
+  text-align: center;
+}
+
+.card-count {
+  margin-top: 0.7rem;
+}
+
+/* img {
+  display: none;
+} */
+
+@media screen and (max-width: 475) {
+  .deck-main {
+    height: 50vh;
+  }
+}

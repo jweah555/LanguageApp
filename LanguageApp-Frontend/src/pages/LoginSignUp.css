@@ -1,0 +1,131 @@
+*,
+*::befor,
+*::after {
+  box-sizing: border-box;
+}
+
+/* auth-container */
+.auth-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  margin-right: 0;
+}
+
+/*Left Side*/
+.auth-left-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  text-align: center;
+  width: 50%;
+}
+
+.auth-h1 {
+  font-size: 2rem;
+  margin-bottom: 0.6rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.please {
+  color: grey;
+  font-size: 0.9rem;
+  margin-bottom: 1.3rem;
+  font-weight: 300;
+}
+
+.user-input[type="email"] {
+  margin-bottom: 0.4rem;
+}
+
+.user-input,
+.user-password-input,
+.sign-button {
+  height: 2.7rem;
+  width: 19rem;
+  border-radius: 8px;
+  border-width: 0.1px;
+  border-color: grey;
+  background-color: white;
+}
+
+.dev-change {
+  font-weight: 500;
+}
+
+.need {
+  font-weight: 350;
+  font-size: 0.9rem;
+  color: grey;
+}
+
+.sign-button {
+  background-color: #0065f8;
+  color: white;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.do {
+  display: flex;
+}
+/* hr {
+  width: 80%;
+  height: 0.5px;
+  background-color: grey;
+  border: 1px;
+} */
+
+.or-span {
+  margin: 0rem 0.5rem;
+  color: grey;
+  font-size: 0.8;
+  font-weight: 300;
+}
+
+.create-span {
+  color: #0065f8;
+  text-decoration: underline;
+}
+
+/*Right Side*/
+.auth-right-side {
+  background-color: #59e191;
+  background-image: radial-gradient(white 10%, transparent 11%);
+  background-size: 30px 30px;
+  background-repeat: repeat;
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  justify-content: center; /* Changed from center to flex-end */
+  align-items: center;
+  padding-right: 0rem; /* Optional: space from edge */
+  margin-right: 0rem;
+}
+
+.auth-image {
+  height: 20rem;
+  width: 20rem;
+  border-radius: 18px;
+}
+
+@media only screen and (max-width: 650px) {
+  /* auth-container */
+  .auth-container {
+    flex-direction: column;
+  }
+
+  .auth-right-side {
+    display: none;
+  }
+}

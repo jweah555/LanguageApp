@@ -1,0 +1,66 @@
+*,
+*::befor,
+*::after {
+  box-sizing: border-box;
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+.profile-container > h1 {
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+
+  font-style: normal;
+  margin-bottom: 0.5rem;
+}
+
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.profile-button {
+  width: 8rem;
+  height: 2.5rem;
+  border-radius: 12px;
+  border-width: 1px;
+  background-color: #56dfcf;
+  font-size: 0.9rem;
+}
+
+.profile-button:hover {
+  background-color: #687fe5;
+  color: white;
+}
+
+.profile-page input {
+  height: 3rem;
+  width: 25rem;
+  border-radius: 12px;
+  border-width: 1px;
+  text-align: center;
+}
+
+@media screen and (max-width: 800px) {
+  .deck-language,
+  .deck-description,
+  .deck-name {
+    width: 18rem;
+    height: 2.5rem;
+  }
+
+  .profile-button {
+    width: 18rem;
+    height: 3.2rem;
+  }
+}

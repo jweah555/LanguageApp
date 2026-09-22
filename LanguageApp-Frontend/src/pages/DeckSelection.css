@@ -1,0 +1,144 @@
+*,
+*::befor,
+*::after {
+  box-sizing: border-box;
+}
+
+.card-page-main {
+  font-family: "Varela Round", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  /* display: flex; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.deck-card-container {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.card-page {
+  width: 20%;
+  background-color: #fff8e8;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* padding-top: 1rem; */
+  padding-bottom: 1rem;
+  /* padding-right: 1rem;
+  padding-left: 1rem; */
+  border-radius: 1rem;
+  border-style: solid;
+  border-width: 0.5px;
+  font-family: "Overpass Mono", monospace;
+  font-optical-sizing: auto;
+
+  font-style: normal;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.card-page img {
+  width: 100%;
+  border-radius: 1rem 1rem 0 0rem;
+  /* border-radius: 15px; */
+}
+
+.card-page button {
+  padding: 0.7rem;
+  border-radius: 15px;
+  border-width: 0px;
+  /* width: 7rem; */
+  background-color: #8ccdeb;
+  font-family: "Overpass Mono", monospace;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 1rem;
+  /* width: 50%; */
+}
+
+.card-page p {
+  margin-top: 0rem;
+  /* margin-bottom: 0rem; */
+  padding-left: 0.8rem;
+  padding-right: 0.3rem;
+}
+
+.card-page hr {
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  align-items: center;
+}
+
+.card-bottom span {
+  background-color: #7ae2cf;
+  padding: 0.75rem;
+  border-radius: 15px;
+}
+
+/* .card-bottom span:hover {
+  background-color: #ffb4a2;
+} */
+
+.card-page button:hover {
+  background-color: #ffb4a2;
+}
+
+.heart-svg {
+  width: 2.5rem;
+}
+
+.card-page:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* shadow behind */
+  transform: scale(1.05); /* slight pop-out */
+  border-color: #555; /* optional: darken border on hover */
+  transition: all 0.2s ease-in-out;
+}
+
+@media screen and (max-width: 1080px) {
+  .deck-card-container {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .card-page {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .card-bottom {
+    flex-direction: column;
+  }
+
+  .deck-card-container {
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .deck-card-container {
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .deck-card-container {
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+  }
+}

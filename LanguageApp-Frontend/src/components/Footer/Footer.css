@@ -1,0 +1,167 @@
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-img {
+  display: flex;
+  justify-content: center;
+  justify-content: space-evenly;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.girlReading,
+.reading,
+.relaxing {
+  width: 25%;
+  max-width: 100%;
+}
+
+.right-left-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 92%;
+  border-radius: 50px;
+  border-width: 1px;
+  /* border-style: solid; */
+  padding-bottom: 1rem;
+  background-color: #feffc4;
+  background-color: #adeed9;
+  background-color: #a1e3f9;
+  background-color: #d4f6ff;
+  margin-bottom: 1rem;
+}
+
+.left-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.right-side {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.end {
+  padding-top: 1rem;
+  margin-left: 0rem;
+  margin-top: 0rem;
+  width: 100%;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  /* background-color: #f6f0f0; */
+  text-align: center;
+}
+
+hr {
+  width: 95%;
+  margin-bottom: 0rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+form h3 {
+  color: #131d4f;
+}
+
+form div {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.footer-list {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  gap: 0.8rem;
+}
+
+.email-message {
+}
+
+.input-sec {
+  display: flex;
+}
+
+.input-sec input {
+  height: 2rem;
+  border-radius: 8px;
+  border-width: 1px;
+}
+
+.input-sec button {
+  background-color: #131d4f;
+  border-style: solid;
+  border-radius: 8px;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+  width: 10rem;
+  border-width: 1px;
+  font-size: 1rem;
+  color: white;
+}
+
+.input-sec button:hover {
+  background-color: #4dffbe; /* new background on hover */
+  transform: scale(1.05);
+  color: #131d4f;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+footer img {
+  max-width: 12%;
+}
+
+.footer-img {
+  display: flex;
+  justify-content: center;
+  justify-content: space-evenly;
+  margin-top: 3.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.girlReading,
+.reading,
+.relaxing {
+  width: 25%;
+  max-width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+  .email-message {
+    flex-direction: column;
+  }
+
+  .right-left-container {
+    /* margin-left: 3rem; */
+    padding-right: 2.5rem;
+    padding-left: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .email-message {
+    flex-direction: column;
+  }
+
+  .right-left-container {
+    /* margin-left: 5rem; */
+    /* margin-right: 3rem;
+    padding-left: 2rem; */
+    padding-right: 0;
+    margin-right: 0;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+}

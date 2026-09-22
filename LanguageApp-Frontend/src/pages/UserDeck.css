@@ -1,0 +1,74 @@
+*,
+*::befor,
+*::after {
+  box-sizing: border-box;
+}
+
+.create-deck-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+.create-deck-container > h1 {
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+
+  font-style: normal;
+  margin-bottom: 0.5rem;
+}
+
+#create-deck {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+}
+
+.deck-language,
+.deck-description,
+.deck-name {
+  width: 20rem;
+  height: 2.5rem;
+  border-radius: 12px;
+  border-width: 1px;
+  font-size: 1rem;
+}
+
+.deck-description {
+  width: 20rem;
+  height: 3.2rem;
+  border-radius: 12px;
+  border-width: 1px;
+}
+
+.create-deck-button {
+  width: 8rem;
+  height: 2.5rem;
+  border-radius: 12px;
+  border-width: 1px;
+  background-color: #56dfcf;
+  font-size: 0.9rem;
+}
+
+.create-deck-button:hover {
+  background-color: #687fe5;
+  color: white;
+}
+
+@media screen and (max-width: 800px) {
+  .deck-language,
+  .deck-description,
+  .deck-name {
+    width: 18rem;
+    height: 2.5rem;
+  }
+
+  .deck-description {
+    width: 18rem;
+    height: 3.2rem;
+  }
+}
