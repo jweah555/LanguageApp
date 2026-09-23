@@ -7,14 +7,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.language.LanguageApp.Deck.Deck;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -44,10 +43,9 @@ public class Users {
     @Column(name = "language",nullable = false)
     private String language;
 
-    // Link to connect users to decks
-    @ManyToMany
-    @JoinTable(name = "users_decks", joinColumns = @JoinColumn(name = "users_id"), inverseJoinColumns = @JoinColumn(name = "deck_id"))
-    @JsonIgnoreProperties("users") // Prevents recursion during JSON serialization
+    // Decks owned by this user
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("owner") // Prevents recursion during JSON serialization
     private Set<Deck> decks = new HashSet<>();
 
     public Users() {
@@ -120,12 +118,12 @@ public class Users {
 
     public void addDeck(Deck deck) {
         this.decks.add(deck);
-        deck.getUsers().add(this);
+        deck.setOwner(this);
     }
 
     public void removeDeck(Deck deck) {
         this.decks.remove(deck);
-        deck.getUsers().remove(this);
+        deck.setOwner(null);
     }
 
     public void setPassword(String password) {

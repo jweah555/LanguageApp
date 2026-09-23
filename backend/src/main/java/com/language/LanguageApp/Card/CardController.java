@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,10 +14,16 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.language.LanguageApp.Users.Users;
+import com.language.LanguageApp.Users.UsersService;
+
 @RestController
 public class CardController {
     @Autowired
     private CardService cardService;
+
+    @Autowired
+    private UsersService usersService;
 
     @GetMapping("/cards")
     public ResponseEntity<List<Card>> getAllCards(){
@@ -25,9 +31,11 @@ public class CardController {
         return ResponseEntity.ok(cards);
     }
 
-    @PostMapping("/cards")
-    public ResponseEntity<Card> addCard(@RequestBody Card card) {
-        Card newCard = cardService.addCard(card);
+    @PostMapping("/decks/{deckId}/cards")
+    public ResponseEntity<Card> addCard(@PathVariable("deckId") Long deckId, @RequestBody Card card,
+            Authentication authentication) {
+        Users currentUser = usersService.getAuthenticatedUser(authentication);
+        Card newCard = cardService.addCard(deckId, card, currentUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(newCard);
     }
 

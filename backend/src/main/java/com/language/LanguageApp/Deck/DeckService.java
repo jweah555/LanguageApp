@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.language.LanguageApp.BadRequestException;
 import com.language.LanguageApp.ResourceNotFoundException;
+import com.language.LanguageApp.Users.Users;
 
 @Service
 public class DeckService {
@@ -36,20 +37,19 @@ public class DeckService {
         return decks;
     }
 
-    public Deck addDeck(Deck deck) {
+    public Deck addDeck(Deck deck, Users owner) {
         if (deck == null) {
             throw new BadRequestException("Deck object must not be null");
         }
+        deck.setOwner(owner);
         return deckRepository.save(deck);
     }
 
     public Deck updateDeck(Long deckId, Deck updatedDeck) {
         Deck existingDeck = deckRepository.findById(deckId)
         .orElseThrow(() -> new ResourceNotFoundException("Deck with ID " + deckId + "not found"));
-        existingDeck.setCards(updatedDeck.getCards());
         existingDeck.setDescription(updatedDeck.getDescription());
         existingDeck.setLanguage(updatedDeck.getLanguage());
-        existingDeck.setUsers(updatedDeck.getUsers());
 
         return deckRepository.save(existingDeck);
     }

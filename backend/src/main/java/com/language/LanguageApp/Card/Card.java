@@ -1,8 +1,5 @@
 package com.language.LanguageApp.Card;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.language.LanguageApp.Deck.Deck;
 
@@ -11,7 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Card {
@@ -19,7 +17,7 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "card_id")
     private Long cardId;
-    
+
     @Column(name = "language",nullable = false)
     private String language;
 
@@ -33,29 +31,30 @@ public class Card {
     private String translation;
 
 
-    //Link to connect cards to deck
-    @ManyToMany(mappedBy = "cards")
+    //Deck this card belongs to; a card always belongs to exactly one deck
+    @ManyToOne
+    @JoinColumn(name = "deck_id", nullable = false)
     @JsonIgnoreProperties("cards")
-    private Set<Deck> decks = new HashSet<>();
+    private Deck deck;
 
     public Card() {
     }
 
-    public Card(Long cardId, String language, String status, String description, String translation, Set<Deck> decks) {
+    public Card(Long cardId, String language, String status, String description, String translation, Deck deck) {
         this.cardId = cardId;
         this.language = language;
         this.status = status;
         this.description = description;
         this.translation = translation;
-        this.decks = decks;
+        this.deck = deck;
     }
 
-    public Card(String language, String status, String description, String translation, Set<Deck> decks) {
+    public Card(String language, String status, String description, String translation, Deck deck) {
         this.language = language;
         this.status = status;
         this.description = description;
         this.translation = translation;
-        this.decks = decks;
+        this.deck = deck;
     }
 
     public Long getCardId() {
@@ -99,12 +98,12 @@ public class Card {
         this.translation = translation;
     }
 
-    public Set<Deck> getDecks() {
-        return this.decks;
+    public Deck getDeck() {
+        return this.deck;
     }
 
-    public void setDeck(Set<Deck> decks) {
-        this.decks = decks;
+    public void setDeck(Deck deck) {
+        this.deck = deck;
     }
 
     @Override

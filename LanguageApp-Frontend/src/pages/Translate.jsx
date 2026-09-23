@@ -44,7 +44,7 @@ function Translate() {
               value={text}
               onChange={(e) => setText(e.target.value)}
             />
-            <button onClick={handleTranslate}>Translate</button>
+            <button className="translate-btn" onClick={handleTranslate}>Translate</button>
           </div>
           <div className="right-translate">
             <input value={translation} readOnly placeholder="Translation" />

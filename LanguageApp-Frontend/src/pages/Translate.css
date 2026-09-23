@@ -94,3 +94,25 @@ option {
   font-weight: 400;
   font-style: normal;
 }
+.translate-btn {
+  padding: 12px 28px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: #4f46e5;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  margin-top: .5rem;
+}
+
+.translate-btn:hover {
+  background-color: #2cb2cd;
+  transform: scale(1.06);
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
+}
+
+.translate-btn:active {
+  transform: scale(0.98);
+}

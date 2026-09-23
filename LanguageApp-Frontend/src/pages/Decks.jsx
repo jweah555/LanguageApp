@@ -1,6 +1,11 @@
 import "../pages/Decks.css";
 import leftArrow from "../assets/images/left-arrow.png";
 import rightArrow from "../assets/images/right-arrow.png";
+
+
+
+
+
 function DeckPage() {
   return (
     <main className="deck-main">

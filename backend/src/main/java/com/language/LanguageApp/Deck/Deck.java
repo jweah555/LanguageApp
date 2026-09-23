@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.language.LanguageApp.Card.Card;
 import com.language.LanguageApp.Users.Users;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,8 +14,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -39,34 +36,34 @@ public class Deck {
     @Column(name = "is_default", nullable = false)
     private boolean isDefault = false;
 
-    //Used to connect decks to user
-    @ManyToMany(mappedBy = "decks")
+    //Owning user; a deck always belongs to exactly one user
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnoreProperties("decks")
-    private Set<Users> users = new HashSet<>();
+    private Users owner;
 
-    //Link to connect decks to cards
-    @ManyToMany
-    @JoinTable(name = "deck_cards", joinColumns = @JoinColumn(name = "deck_id"), inverseJoinColumns = @JoinColumn(name = "card_id"))
-    @JsonIgnoreProperties("decks")
+    //Cards in this deck; a card always belongs to exactly one deck
+    @OneToMany(mappedBy = "deck", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("deck")
     private Set<Card> cards = new HashSet<>();
 
 
     public Deck() {
     }
 
-    public Deck(Long deckId, String language, String description, Set<Card> cards, Set<Users> users) {
+    public Deck(Long deckId, String language, String description, Set<Card> cards, Users owner) {
         this.deckId = deckId;
         this.language = language;
         this.description = description;
         this.cards = cards;
-        this.users = users;
+        this.owner = owner;
     }
 
-    public Deck(String language, String description, Set<Card> cards, Set<Users> users) {
+    public Deck(String language, String description, Set<Card> cards, Users owner) {
         this.language = language;
         this.description = description;
         this.cards = cards;
-        this.users = users;
+        this.owner = owner;
     }
 
     public Long getDeckId() {
@@ -111,20 +108,20 @@ public class Deck {
 
     public void addCard(Card card) {
         this.cards.add(card);
-        card.getDecks().add(this);
+        card.setDeck(this);
     }
 
     public void removeCard(Card card) {
         this.cards.remove(card);
-        card.getDecks().remove(this);
+        card.setDeck(null);
     }
 
-    public Set<Users> getUsers() {
-        return this.users;
+    public Users getOwner() {
+        return this.owner;
     }
 
-    public void setUsers(Set<Users> users) {
-        this.users = users;
+    public void setOwner(Users owner) {
+        this.owner = owner;
     }
 
     @Override
