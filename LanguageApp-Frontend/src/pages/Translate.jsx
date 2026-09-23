@@ -8,6 +8,13 @@ function Translate() {
   const [sourceLang, setSourceLang] = useState("");
   const [targetLang, setTargetLang] = useState("EN-US");
 
+
+  function handleClear() {
+    setText("");
+    setTranslation("");
+  }
+ 
+
   async function handleTranslate() {
     if (!text.trim()) return;
     const res = await fetch("http://localhost:8080/api/translate", {
@@ -15,9 +22,17 @@ function Translate() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text, sourceLang, targetLang }),
     });
+    
     const data = await res.json();
     setTranslation(data.translation);
+    const a = data.translation;
+    console.log(a);
+    console.log(typeof(a));
+    
+
   }
+
+  
 
   return (
     <main>
@@ -25,7 +40,7 @@ function Translate() {
         <div className="translate-header">
           <label htmlFor="source-lang">Translate from</label>
           <select id="source-lang" value={sourceLang} onChange={(e) => setSourceLang(e.target.value)}>
-            <option value="">Detect language</option>
+            <option value="">Language</option>
             <option value="EN">English 🇺🇸</option>
             <option value="ES">Spanish 🇪🇸</option>
             <option value="FR">French 🇫🇷</option>
@@ -42,14 +57,27 @@ function Translate() {
             <input
               placeholder="Type to Translate"
               value={text}
-              onChange={(e) => setText(e.target.value)}
+              // setText(e.target.value)
+              onChange={(e) =>  {
+                setText(e.target.value)
+                
+              } }
+              
             />
-            <button className="translate-btn" onClick={handleTranslate}>Translate</button>
+            
           </div>
+         
           <div className="right-translate">
             <input value={translation} readOnly placeholder="Translation" />
           </div>
+          
         </div>
+        <div className="translate-btns">
+          <button className="translate-btn"   onClick={handleTranslate}>Translate</button>
+          <button className="translate-btn"   onClick={handleClear}>Clear</button>
+            
+        </div>
+         
       </section>
     </main>
   );
