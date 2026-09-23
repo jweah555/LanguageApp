@@ -31,7 +31,7 @@ public class CardController {
         return ResponseEntity.ok(cards);
     }
 
-    @PostMapping("/decks/{deckId}/cards")
+    @PostMapping("/card/{deckId}")
     public ResponseEntity<Card> addCard(@PathVariable("deckId") Long deckId, @RequestBody Card card,
             Authentication authentication) {
         Users currentUser = usersService.getAuthenticatedUser(authentication);

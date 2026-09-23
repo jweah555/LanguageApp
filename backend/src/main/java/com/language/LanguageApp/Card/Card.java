@@ -18,17 +18,20 @@ public class Card {
     @Column(name = "card_id")
     private Long cardId;
 
+    //Target language the user is learning; the language of the front of the card
     @Column(name = "language",nullable = false)
     private String language;
 
     @Column(name = "status",nullable = true)
     private String status;
 
-    @Column(name = "description", nullable = false)
-    private String description;
+    //Word or phrase in the target language
+    @Column(name = "front", nullable = false)
+    private String front;
 
-    @Column(name = "translation", nullable = false)
-    private String translation;
+    //Meaning in the source language the user already knows
+    @Column(name = "back", nullable = false)
+    private String back;
 
 
     //Deck this card belongs to; a card always belongs to exactly one deck
@@ -40,20 +43,20 @@ public class Card {
     public Card() {
     }
 
-    public Card(Long cardId, String language, String status, String description, String translation, Deck deck) {
+    public Card(Long cardId, String language, String status, String front, String back, Deck deck) {
         this.cardId = cardId;
         this.language = language;
         this.status = status;
-        this.description = description;
-        this.translation = translation;
+        this.front = front;
+        this.back = back;
         this.deck = deck;
     }
 
-    public Card(String language, String status, String description, String translation, Deck deck) {
+    public Card(String language, String status, String front, String back, Deck deck) {
         this.language = language;
         this.status = status;
-        this.description = description;
-        this.translation = translation;
+        this.front = front;
+        this.back = back;
         this.deck = deck;
     }
 
@@ -82,20 +85,20 @@ public class Card {
         this.status = status;
     }
 
-    public String getDescription() {
-        return this.description;
+    public String getFront() {
+        return this.front;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setFront(String front) {
+        this.front = front;
     }
 
-    public String getTranslation() {
-        return this.translation;
+    public String getBack() {
+        return this.back;
     }
 
-    public void setTranslation(String translation) {
-        this.translation = translation;
+    public void setBack(String back) {
+        this.back = back;
     }
 
     public Deck getDeck() {

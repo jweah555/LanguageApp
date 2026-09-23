@@ -54,7 +54,7 @@ function Translate() {
         </div>
         <div className="left-right-translate">
           <div className="left-translate">
-            <input
+            <textarea
               placeholder="Type to Translate"
               value={text}
               // setText(e.target.value)
@@ -68,7 +68,7 @@ function Translate() {
           </div>
          
           <div className="right-translate">
-            <input value={translation} readOnly placeholder="Translation" />
+            <textarea value={translation} readOnly placeholder="Translation" />
           </div>
           
         </div>

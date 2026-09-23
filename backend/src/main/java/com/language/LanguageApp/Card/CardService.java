@@ -66,10 +66,10 @@ public class CardService {
 
     public Card updateCardById(Long cardId, Card updatedCard ){
         Card existingCard = cardRepository.findById(cardId).orElseThrow(() -> new ResourceNotFoundException("Card not found"));
-        existingCard.setDescription(updatedCard.getDescription());
+        existingCard.setFront(updatedCard.getFront());
         existingCard.setLanguage(updatedCard.getLanguage());
         existingCard.setStatus(updatedCard.getStatus());
-        existingCard.setTranslation(updatedCard.getTranslation());
+        existingCard.setBack(updatedCard.getBack());
 
         return cardRepository.save(existingCard);
     }
