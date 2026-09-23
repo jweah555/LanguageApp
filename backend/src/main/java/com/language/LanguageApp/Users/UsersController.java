@@ -1,6 +1,7 @@
 package com.language.LanguageApp.Users;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.deepl.api.DeepLClient;
+import com.deepl.api.TextResult;
 import com.language.LanguageApp.ResourceNotFoundException;
 
 import ch.qos.logback.core.model.Model;
@@ -18,11 +21,13 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 public class UsersController {
     private final UsersRepository usersRepository;
     private final UsersService usersService;
+
 
     @Autowired
     public UsersController(UsersRepository usersRepository, UsersService usersService) {

@@ -11,3 +11,4 @@ spring.datasource.password=<password>
 # JPA/Hibernate Config
 spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.hibernate.ddl-auto=update
+
