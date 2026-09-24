@@ -41,7 +41,8 @@
 }
 
 .card-language,
-.card-name {
+.card-name,
+.card-deck {
   width: 25rem;
   height: 2.5rem;
   border-radius: 12px;
@@ -70,7 +71,8 @@
   }
 
   .card-language,
-  .card-name {
+  .card-name,
+  .card-deck {
     width: 18rem;
     height: 2.5rem;
   }
