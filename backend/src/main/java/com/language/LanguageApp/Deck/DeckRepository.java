@@ -8,5 +8,5 @@ import java.util.List;
 @Repository
 public interface DeckRepository extends JpaRepository<Deck, Long>{
     List<Deck> findByLanguage(String language);
-    
+    List<Deck> findByOwner_UsersId(Long userId);
 }

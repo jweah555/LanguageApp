@@ -54,6 +54,12 @@ public class DeckController {
         return ResponseEntity.ok(decks);
     }
 
+    @GetMapping("/decks/users/{userId}")
+    public ResponseEntity<List<Deck>> getDecksByOwnerId(@PathVariable("userId") Long userId) {
+        List<Deck> decks = deckService.getDeckByOwner(userId);
+        return ResponseEntity.ok(decks);
+    }
+
     @PutMapping("/decks/{deckId}")
     public ResponseEntity<Deck> updateDeckById(@PathVariable("deckId") Long deckId, @RequestBody Deck updatedDeck) {
         Deck newDeck = deckService.updateDeck(deckId, updatedDeck);
