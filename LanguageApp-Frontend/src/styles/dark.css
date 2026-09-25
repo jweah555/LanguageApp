@@ -1,0 +1,380 @@
+/*
+  Dark mode. Everything here only applies when <html data-theme="dark">,
+  so the light styles in each page's own CSS file stay untouched.
+*/
+
+:root[data-theme="dark"] {
+  --dark-bg: #12151f;
+  --dark-panel: #181d2b;
+  --dark-surface: #1f2536;
+  --dark-surface-2: #283048;
+  --dark-line: rgba(255, 255, 255, 0.1);
+  --dark-text: #e6e9f2;
+  --dark-muted: #a3abc2;
+  --dark-sky: #76c0ec;
+
+  color-scheme: dark;
+}
+
+/* ---------- Base ---------- */
+
+:root[data-theme="dark"] body {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] select {
+  background-color: var(--dark-surface-2);
+  border-color: var(--dark-line);
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] input::placeholder,
+:root[data-theme="dark"] textarea::placeholder {
+  color: #7d86a1;
+}
+
+:root[data-theme="dark"] hr {
+  border-color: var(--dark-line);
+}
+
+/* ---------- Header ---------- */
+
+:root[data-theme="dark"] header {
+  background-color: var(--dark-bg);
+}
+
+:root[data-theme="dark"] header a {
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] header svg text,
+:root[data-theme="dark"] footer svg text {
+  fill: var(--dark-text);
+}
+
+:root[data-theme="dark"] .main-option > li:hover,
+:root[data-theme="dark"] .login:hover {
+  color: #12151f;
+}
+
+:root[data-theme="dark"] .getStarted {
+  background-color: var(--dark-text);
+  color: var(--dark-bg);
+}
+
+:root[data-theme="dark"] header .theme-toggle {
+  background-color: var(--dark-surface-2);
+  border-color: var(--dark-line);
+}
+
+:root[data-theme="dark"] header .theme-toggle:hover {
+  background-color: #3a4462;
+}
+
+:root[data-theme="dark"] .sub-nav a {
+  color: var(--dark-text);
+}
+
+/* ---------- Footer ---------- */
+
+:root[data-theme="dark"] .right-left-container {
+  background-color: var(--dark-surface);
+}
+
+:root[data-theme="dark"] form h3 {
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .input-sec button {
+  background-color: var(--dark-sky);
+  border-color: var(--dark-sky);
+  color: #12151f;
+}
+
+:root[data-theme="dark"] .end {
+  color: var(--dark-muted);
+}
+
+/* ---------- Home ---------- */
+
+:root[data-theme="dark"] .main-body a {
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .section2 {
+  color: #8fb4ea;
+}
+
+:root[data-theme="dark"] .section3 h2 {
+  color: #3fd0ca;
+}
+
+:root[data-theme="dark"] .language-list {
+  color: #c9d4f5;
+}
+
+:root[data-theme="dark"] .language-option {
+  background-color: var(--dark-surface);
+  border-color: var(--dark-line);
+}
+
+/* ---------- Login / Sign up ---------- */
+
+:root[data-theme="dark"] .user-input,
+:root[data-theme="dark"] .user-password-input {
+  background-color: var(--dark-surface-2);
+  border-color: var(--dark-line);
+}
+
+:root[data-theme="dark"] .please,
+:root[data-theme="dark"] .need,
+:root[data-theme="dark"] .or-span {
+  color: var(--dark-muted);
+}
+
+:root[data-theme="dark"] .create-span {
+  color: #6ea8ff;
+}
+
+:root[data-theme="dark"] .auth-right-side {
+  background-color: #2f8f59;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.35) 10%, transparent 11%);
+}
+
+/* ---------- Create Card / Create Deck / Profile ---------- */
+
+:root[data-theme="dark"] .create-card-button,
+:root[data-theme="dark"] .create-deck-button,
+:root[data-theme="dark"] .profile-button {
+  border-color: transparent;
+  color: #12151f;
+}
+
+:root[data-theme="dark"] .create-card-button:hover,
+:root[data-theme="dark"] .create-deck-button:hover,
+:root[data-theme="dark"] .profile-button:hover {
+  color: white;
+}
+
+/* ---------- Deck page (/deckpage) ---------- */
+
+:root[data-theme="dark"] .card {
+  background-color: var(--dark-surface);
+}
+
+:root[data-theme="dark"] .due-new span {
+  background-color: #3d3620;
+  color: #ffe99a;
+}
+
+/* ---------- Your Decks (/userDeck) ---------- */
+
+:root[data-theme="dark"] .user-deck-page {
+  --ud-muted: var(--dark-muted);
+  --ud-cream: var(--dark-surface-2);
+  background-color: var(--dark-panel);
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .user-deck-card {
+  background-color: var(--dark-surface);
+  border-color: var(--dark-line);
+}
+
+:root[data-theme="dark"] .user-deck-language {
+  background-color: #243349;
+  color: #cfe6f7;
+}
+
+:root[data-theme="dark"] .user-deck-footer {
+  border-top-color: var(--dark-line);
+}
+
+:root[data-theme="dark"] .create-deck-link,
+:root[data-theme="dark"] .user-deck-button.primary {
+  background-color: var(--ud-sky);
+  border-color: var(--ud-sky);
+  color: #12151f;
+}
+
+:root[data-theme="dark"] .create-deck-link:hover,
+:root[data-theme="dark"] .user-deck-button.primary:hover {
+  background-color: var(--ud-coral);
+  border-color: var(--ud-coral);
+  color: #12151f;
+}
+
+:root[data-theme="dark"] .user-deck-button.secondary {
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .user-deck-button.secondary:hover {
+  color: #12151f;
+}
+
+:root[data-theme="dark"] .user-deck-empty {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* ---------- Deck list (/userDeck/:id/view) ---------- */
+
+:root[data-theme="dark"] .deck-view-page {
+  --dv-muted: var(--dark-muted);
+  --dv-cream: var(--dark-surface-2);
+  --dv-line: var(--dark-line);
+  background-color: var(--dark-panel);
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .deck-view-back:hover {
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .deck-view-language {
+  background-color: #243349;
+  color: #cfe6f7;
+}
+
+:root[data-theme="dark"] .deck-view-list {
+  background-color: var(--dark-surface);
+}
+
+:root[data-theme="dark"] .deck-view-row:nth-child(odd):not(.deck-view-labels) {
+  background-color: #222940;
+}
+
+:root[data-theme="dark"] .deck-view-button.primary {
+  background-color: var(--dv-sky);
+  border-color: var(--dv-sky);
+  color: #12151f;
+}
+
+:root[data-theme="dark"] .deck-view-button.secondary {
+  background-color: transparent;
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .deck-view-button.secondary:hover {
+  background-color: var(--dv-sky);
+  color: #12151f;
+}
+
+:root[data-theme="dark"] .deck-view-empty {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* ---------- Study / swipe page (/userDeck/:id) ---------- */
+
+:root[data-theme="dark"] .study-page {
+  --study-muted: var(--dark-muted);
+  background-color: var(--dark-panel);
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .study-language {
+  background-color: var(--dark-surface-2);
+}
+
+:root[data-theme="dark"] .study-link {
+  background-color: var(--study-sky);
+  color: #12151f;
+}
+
+:root[data-theme="dark"] .study-progress-track {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+:root[data-theme="dark"] .flip-card-front {
+  background-color: var(--dark-surface);
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .flip-card-front .flip-card-label {
+  background-color: #243349;
+  color: #cfe6f7;
+}
+
+:root[data-theme="dark"] .flip-card-face {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+:root[data-theme="dark"] .deck-cards-arrow {
+  background-color: var(--dark-surface-2);
+}
+
+/* The arrow images are dark, so flip them light */
+:root[data-theme="dark"] .deck-cards-arrow img {
+  filter: invert(1);
+}
+
+:root[data-theme="dark"] .deck-cards-arrow:hover:not(:disabled) img {
+  filter: none;
+}
+
+:root[data-theme="dark"] .study-empty {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* ---------- Translate ---------- */
+
+:root[data-theme="dark"] .translate-page {
+  --tr-ink: var(--dark-text);
+  --tr-muted: var(--dark-muted);
+  --tr-line: var(--dark-line);
+  --tr-lilac: #231f36;
+  background-color: var(--dark-panel);
+}
+
+:root[data-theme="dark"] .translate-card {
+  background-color: var(--dark-surface);
+}
+
+:root[data-theme="dark"] .translate-lang label,
+:root[data-theme="dark"] .translate-arrow {
+  color: #b9a3f0;
+}
+
+:root[data-theme="dark"] .translate-lang select {
+  background-color: var(--dark-surface-2);
+}
+
+:root[data-theme="dark"] .translate-input {
+  background-color: var(--dark-surface);
+}
+
+:root[data-theme="dark"] .translate-output {
+  background-color: #1b2030;
+}
+
+:root[data-theme="dark"] .translate-btn.clear {
+  background-color: var(--dark-surface-2);
+}
+
+:root[data-theme="dark"] .translate-btn.clear:hover {
+  color: #12151f;
+}
+
+:root[data-theme="dark"] .translate-btn.like {
+  background-color: transparent;
+  color: #ff9fb2;
+}
+
+:root[data-theme="dark"] .translate-btn.like:hover:not(:disabled) {
+  background-color: rgba(255, 143, 163, 0.15);
+}
+
+:root[data-theme="dark"] .translate-btn.like:disabled {
+  background-color: #ff8fa3;
+  color: #12151f;
+}
+
+:root[data-theme="dark"] .translate-login {
+  color: #b9a3f0;
+}
+
+:root[data-theme="dark"] .translate-save-error {
+  color: #ff9fb2;
+}

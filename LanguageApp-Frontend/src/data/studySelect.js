@@ -8,13 +8,13 @@ export const StudySelect = [
     id: 1,
     image: repeat,
     text: "Spaced Rep Deck",
-    pageLink: "/deckSelection",
+    pageLink: "/userDeck",
   },
   {
     id: 2,
     image: flashCards,
     text: "Normal Prac Deck",
-    pageLink: "/deckSelection",
+    pageLink: "/userDeck",
   },
   {
     id: 3,

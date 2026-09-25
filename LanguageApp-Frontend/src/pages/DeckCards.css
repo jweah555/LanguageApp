@@ -1,54 +1,117 @@
-.deck-cards-header {
+/* ---------- Deck study page ---------- */
+
+.study-page {
+  --study-indigo: #425b9a;
+  --study-muted: #5d6b8f;
+  --study-sky: #76c0ec;
+  --study-teal: #31aaa9;
+  --study-pink: #ff95a5;
+  --study-cream: #fbf7ec;
+
+  max-width: 900px;
+  margin: 2rem auto 3rem;
+  padding: 2rem;
+  border-radius: 24px;
+  background-color: #eef6fc;
+  color: var(--study-indigo);
+  font-family: "Varela Round", sans-serif;
+}
+
+.study-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-.deck-cards-back {
-  padding: 0.7rem 1rem;
-  border-radius: 15px;
-  background-color: #8ccdeb;
-  color: inherit;
+.study-language {
+  display: inline-block;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background-color: white;
+  font-family: "Overpass Mono", monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.study-title {
+  margin: 0.5rem 0 0;
+  font-family: "Raleway", sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  word-break: break-word;
+}
+
+.study-link {
+  padding: 0.65rem 1.2rem;
+  border-radius: 999px;
+  background-color: var(--study-indigo);
+  color: white;
   text-decoration: none;
   font-family: "Overpass Mono", monospace;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(66, 91, 154, 0.25);
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
-.deck-cards-back:hover {
-  background-color: #ffb4a2;
+.study-link:hover {
+  background-color: var(--study-pink);
+  color: var(--study-indigo);
+  transform: translateY(-2px);
+}
+
+.study-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Progress through the deck */
+.study-progress {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.study-count {
+  flex-shrink: 0;
+  font-family: "Overpass Mono", monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.study-progress-track {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background-color: rgba(66, 91, 154, 0.1);
+  overflow: hidden;
+}
+
+.study-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background-color: var(--study-teal);
+  transition: width 0.3s ease;
 }
 
 /* The swipe area: stop the browser from scrolling or selecting text while dragging */
 .deck-cards-swipe {
-  justify-content: center;
   cursor: pointer;
   touch-action: pan-y;
   user-select: none;
 }
 
-.card .deck-cards-hint {
-  font-size: 0.9rem;
-  padding: 0;
-  margin: 0 0 1rem;
-  color: #777;
-}
-
-.deck-cards-arrow {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-}
-
-.deck-cards-arrow:disabled {
-  opacity: 0.3;
-  cursor: default;
-}
-
 /* Flipping card: both faces sit in the same spot, and the inner box turns over */
 .flip-card {
-  width: 80%;
-  margin: 2rem 0 1rem;
-  perspective: 1000px;
+  width: 100%;
+  margin: 1.5rem 0;
+  perspective: 1200px;
 }
 
 .flip-card-inner {
@@ -62,36 +125,160 @@
 }
 
 .flip-card-face {
+  position: relative;
   grid-area: 1 / 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 12rem;
-  padding: 1rem;
+  min-height: 18rem;
+  padding: 3rem 2rem;
   text-align: center;
-  border-radius: 12px;
+  border-radius: 20px;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(66, 91, 154, 0.15);
+}
+
+.flip-card-face p {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.3;
+  word-break: break-word;
 }
 
 .flip-card-front {
-  background-color: #fff8e8;
+  background-color: white;
+  border-top: 8px solid var(--study-sky);
 }
 
 .flip-card-back {
-  background-color: #e6f4fb;
+  background-color: var(--study-indigo);
+  border-top: 8px solid var(--study-pink);
+  color: white;
   transform: rotateY(180deg);
 }
 
-.card .flip-card-face p {
-  padding: 0;
-  margin: 0;
+.flip-card-label {
+  position: absolute;
+  top: 1rem;
+  left: 1.25rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-family: "Overpass Mono", monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.flip-card-front .flip-card-label {
+  background-color: #e4f3fc;
+  color: var(--study-indigo);
+}
+
+.flip-card-back .flip-card-label {
+  background-color: var(--study-pink);
+  color: var(--study-indigo);
+}
+
+/* Previous / Flip / Next */
+.study-controls {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.deck-cards-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  border: 2px solid var(--study-sky);
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.deck-cards-arrow img {
+  width: 1.4rem;
+}
+
+.deck-cards-arrow:hover:not(:disabled) {
+  background-color: var(--study-sky);
+  transform: scale(1.08);
+}
+
+.deck-cards-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
 }
 
 .deck-cards-flip {
+  padding: 0.8rem 2.2rem;
   border: none;
-  cursor: pointer;
+  border-radius: 999px;
+  background-color: var(--study-teal);
+  color: white;
+  font-family: "Overpass Mono", monospace;
   font-size: 1rem;
-  margin-bottom: 0.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(49, 170, 169, 0.5);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.deck-cards-flip:hover {
+  background-color: var(--study-pink);
+  color: var(--study-indigo);
+  transform: translateY(-2px);
+}
+
+.deck-cards-hint {
+  margin: 1.25rem 0 0;
+  color: var(--study-muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* Shown when the deck is empty or failed to load */
+.study-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1rem;
+  border: 2px dashed var(--study-sky);
+  border-radius: 18px;
+  background-color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+}
+
+.study-empty h2 {
+  margin: 0 0 0.5rem;
+  font-family: "Raleway", sans-serif;
+}
+
+.study-empty p {
+  margin: 0 0 1.5rem;
+  color: var(--study-muted);
+}
+
+@media screen and (max-width: 600px) {
+  .study-page {
+    margin: 1rem;
+    padding: 1.25rem;
+  }
+
+  .study-title {
+    font-size: 1.6rem;
+  }
+
+  .flip-card-face {
+    min-height: 14rem;
+  }
+
+  .flip-card-face p {
+    font-size: 1.5rem;
+  }
 }

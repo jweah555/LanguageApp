@@ -27,36 +27,68 @@ function UserDeck() {
   }
 
   return (
-    <main className="card-page-main">
+    <div className="user-deck-page">
       <div className="user-deck-header">
-        <h1>Your Decks</h1>
+        <div>
+          <h1 className="user-deck-title">Your Decks</h1>
+          <p className="user-deck-subtitle">
+            {decks.length} {decks.length === 1 ? "deck" : "decks"} ready to study
+          </p>
+        </div>
         <Link to="/createDeck" className="create-deck-link">
-          Create Deck
+          + Create Deck
         </Link>
       </div>
 
-      <div className="deck-card-container">
-        {decks.map((deck) => (
-          <div className="card-page" key={deck.deckId}>
-            <Link to={`/userDeck/${deck.deckId}`} className="deck-open-link">
-              <h2 className="card-header">{deck.deckName || deck.description}</h2>
-              <p className="card-text">{deck.description}</p>
-              <p className="card-text">{deck.language}</p>
-            </Link>
-            <hr />
-            <div className="card-bottom">
-              <Link to={`/userDeck/${deck.deckId}`}>
-                <button className="card-button">View</button>
+      {decks.length === 0 ? (
+        <div className="user-deck-empty">
+          <h2>No decks yet</h2>
+          <p>Create your first deck to start adding flashcards.</p>
+          <Link to="/createDeck" className="create-deck-link">
+            + Create Deck
+          </Link>
+        </div>
+      ) : (
+        <div className="user-deck-grid">
+          {decks.map((deck) => (
+            <div className="user-deck-card" key={deck.deckId}>
+              <Link to={`/userDeck/${deck.deckId}/view`} className="deck-open-link">
+                <div className="user-deck-top">
+                  {deck.language && (
+                    <span className="user-deck-language">{deck.language}</span>
+                  )}
+                  <span className="user-deck-count">
+                    {deck.cards.length} {deck.cards.length === 1 ? "card" : "cards"}
+                  </span>
+                </div>
+                <h2 className="user-deck-name">
+                  {deck.deckName || deck.description}
+                </h2>
               </Link>
-              <Link to="/createCard">
-                <button className="card-button">Add</button>
-              </Link>
-              <span>{deck.cards.length} cards</span>
+              <div className="user-deck-footer">
+                <Link
+                  to={`/userDeck/${deck.deckId}`}
+                  className="user-deck-button study"
+                >
+                  Study
+                </Link>
+                <div className="user-deck-actions">
+                  <Link to="/createCard" className="user-deck-button secondary">
+                    Add
+                  </Link>
+                  <Link
+                    to={`/userDeck/${deck.deckId}/view`}
+                    className="user-deck-button primary"
+                  >
+                    View
+                  </Link>
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </main>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 

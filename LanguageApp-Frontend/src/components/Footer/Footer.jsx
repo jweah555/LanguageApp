@@ -10,7 +10,6 @@ import { useLocation } from "react-router-dom";
 function Footer() {
   const location = useLocation();
 
-  const isDeckSelectionPage = location.pathname === "/deckSelection";
   const isDeckPage = location.pathname === "/deckpage";
   const isTranslatePage = location.pathname === "/translate";
   const isLoginSignUpPage = location.pathname === "/loginSignUp";
@@ -35,8 +34,7 @@ function Footer() {
         !isCreatePage &&
         !isLoginSignUpPage &&
         !isDeckPage &&
-        !isTranslatePage &&
-        !isDeckSelectionPage && (
+        !isTranslatePage && (
           <>
             <div className="right-left-container">
               <div className="left-side">

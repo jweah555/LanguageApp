@@ -37,7 +37,12 @@
   font-size: 1rem;
   font-style: normal;
   margin-bottom: 0.5rem;
+  padding: 0.75rem;
+  border-style: solid;
   resize: none;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  overflow-y: auto;
 }
 
 .card-language,

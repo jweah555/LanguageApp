@@ -18,6 +18,11 @@ header {
 header ul {
   display: flex;
   gap: 2rem;
+  padding-left: 0;
+}
+
+header li {
+  list-style-type: none;
 }
 
 ul {
@@ -99,6 +104,35 @@ header button {
   display: none;
 }
 
+/* Light/dark switch: the desktop one sits by Login, the mobile one by Menu */
+header .theme-toggle {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0;
+  border: 1px solid #d9dce3;
+  border-radius: 50%;
+  background-color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+header .theme-toggle:hover {
+  background-color: #ffd700;
+  transform: scale(1.05);
+}
+
+header .theme-toggle.mobile {
+  display: none;
+}
+
+.theme-toggle-item {
+  list-style-type: none;
+}
+
 @media screen and (max-width: 768px) {
   .main-option,
   .login,
@@ -168,6 +202,14 @@ header button {
 
   header > ul:last-of-type {
     display: none;
+  }
+
+  header .theme-toggle.mobile {
+    display: inline-flex;
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-left: auto;
+    margin-right: 0.75rem;
   }
   /* 
   header > ul {

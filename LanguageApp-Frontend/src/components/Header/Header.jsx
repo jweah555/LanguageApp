@@ -3,12 +3,14 @@ import "../Header/Header.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { useTheme } from "../../hooks/useTheme";
 // import { useLocation } from "react-router-dom";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const [theme, toggleTheme] = useTheme();
   // const isLoginSignUpPage = location.pathname ==
 
   const handleLogout = async () => {
@@ -48,6 +50,8 @@ function Header() {
           </svg>
         </Link>
 
+        <ThemeToggle theme={theme} onToggle={toggleTheme} className="mobile" />
+
         <button onClick={() => setIsOpen(!isOpen)}>
           {/* <img
             // className="ham-Icon"
@@ -68,8 +72,12 @@ function Header() {
               <li>Create</li>
             </Link>
 
-            <Link to="/deckSelection">
+            <Link to="/userDeck">
               <li>Decks</li>
+            </Link>
+
+            <Link to="/translate">
+              <li>Translate</li>
             </Link>
 
             <li>Profile</li>
@@ -97,14 +105,20 @@ function Header() {
           <li>Create</li>
         </Link>
 
-        <Link to="/deckSelection">
+        <Link to="/userDeck">
           <li>Decks</li>
+        </Link>
+        <Link to="/translate">
+          <li>Translate</li>
         </Link>
         <Link to="/profile">
           <li>Profile</li>
         </Link>
       </ul>
       <ul>
+        <li className="theme-toggle-item">
+          <ThemeToggle theme={theme} onToggle={toggleTheme} className="desktop" />
+        </li>
         {user ? (
           <>
             <li className="welcome">Hi, {user.firstName}</li>
@@ -124,6 +138,21 @@ function Header() {
         )}
       </ul>
     </header>
+  );
+}
+
+function ThemeToggle({ theme, onToggle, className }) {
+  const isDark = theme === "dark";
+  return (
+    <button
+      type="button"
+      className={`theme-toggle ${className}`}
+      onClick={onToggle}
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      title={isDark ? "Light mode" : "Dark mode"}
+    >
+      {isDark ? "☀️" : "🌙"}
+    </button>
   );
 }
 

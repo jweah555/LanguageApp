@@ -4,132 +4,253 @@
   box-sizing: border-box;
 }
 
-.translate-container {
+/* ---------- Translate page ---------- */
+
+.translate-page {
+  --tr-ink: #1f2a44;
+  --tr-muted: #6b7280;
+  --tr-plum: #6c4ab6;
+  --tr-plum-dark: #553a93;
+  --tr-lilac: #efe9fb;
+  --tr-peach: #ffd8b8;
+  --tr-line: #e4dcf3;
+
+  max-width: 1000px;
+  margin: 2rem auto 3rem;
+  padding: 2rem;
+  border-radius: 24px;
+  background-color: #f8f5fd;
+  color: var(--tr-ink);
+  font-family: "Ubuntu", sans-serif;
+}
+
+.translate-intro {
+  margin-bottom: 1.5rem;
+}
+
+.translate-title {
+  margin: 0;
+  font-family: "Raleway", sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+}
+
+.translate-subtitle {
+  margin: 0.25rem 0 0;
+  color: var(--tr-muted);
+}
+
+.translate-card {
+  overflow: hidden;
+  border: 1px solid var(--tr-line);
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 0 6px 20px rgba(31, 42, 68, 0.08);
+}
+
+/* Language pickers */
+.translate-langs {
   display: flex;
-  margin-top: 3rem;
-  justify-content: center;
-  flex-direction: column;
   align-items: center;
   gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--tr-line);
+  background-color: var(--tr-lilac);
+}
+
+.translate-lang {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.translate-lang label {
+  font-family: "Overpass Mono", monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--tr-plum-dark);
+}
+
+.translate-lang select {
+  flex: 1;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--tr-line);
+  border-radius: 999px;
+  background-color: white;
+  color: var(--tr-ink);
   font-family: "Ubuntu", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 1.3rem;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
-.translate-header {
-  display: flex;
-  justify-content: center;
-  padding-top: 1.2rem;
-  padding-bottom: 1.2rem;
-  border-top-right-radius: 12px;
-  border-top-left-radius: 12px;
-  gap: 1rem;
-  border-width: 1px;
-  border-style: solid;
-  border-bottom-style: none;
-
-  width: 50%;
-  border-color: #b5c0d0;
+.translate-lang select:focus {
+  outline: 2px solid var(--tr-plum);
+  outline-offset: 1px;
 }
 
-.left-right-translate {
-  display: flex;
-  gap: 1rem;
-  /* border-style: solid; */
-  width: 50%;
-  justify-content: center;
-  border-width: 1px;
-  margin-top: -1rem;
-  
-  /* border-style: solid; */
-  /* border-color: #b5c0d0; */
-
-  /* height: 30vh; */
+.translate-arrow {
+  color: var(--tr-plum);
+  font-size: 1.4rem;
+  font-weight: 700;
 }
 
-div textarea {
+/* Input and output boxes */
+.translate-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.translate-panels textarea {
   width: 100%;
-  height: 30vh;
-  border-style: solid;
-  padding: 0.75rem;
+  min-height: 16rem;
+  padding: 1.25rem;
+  border: none;
   resize: none;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.5;
   white-space: pre-wrap;
   overflow-wrap: break-word;
-  overflow-y: auto;
-  font-family: Arial, sans-serif;
+  color: var(--tr-ink);
 }
 
-.left-translate {
-  width: 100%;
-  border-width: 0px;
-  /* border-style: solid; */
+.translate-panels textarea:focus {
+  outline: none;
 }
 
-.right-translate {
-  width: 100%;
-  border-width: 0px;
-  border-style: none;
-  height: 15rem;
-  margin-left: -1rem;
-  margin-right: 0.5rem;
-  /* border-bottom-right-radius: 12px;
-  border-bottom-left-radius: 12px; */
+.translate-input {
+  background-color: white;
+  border-right: 1px solid var(--tr-line) !important;
 }
 
-.left-translate textarea {
-  border-bottom-left-radius: 12px;
-  border-color: #b5c0d0;
-  border-width: 1px;
-  vertical-align: top;
-  font-size: 1rem;
-  font-family: Arial, sans-serif;
-  
-  
-
-}
-.right-translate textarea {
-  border-bottom-right-radius: 12px;
-  border-color: #b5c0d0;
-  border-width: 1px;
-  vertical-align: top;
-  font-size: 1rem;
-  
+.translate-output {
+  background-color: #fdfbff;
 }
 
-div select {
-  border-width: 0px;
+.translate-panels textarea::placeholder {
+  color: #a3a8b5;
 }
 
-option {
-  font-family: "Ubuntu", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+/* Buttons */
+.translate-btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--tr-line);
 }
+
 .translate-btn {
-  padding: 12px 28px;
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: #fff;
-  background-color: #4f46e5;
-  border: none;
-  border-radius: 8px;
+  padding: 0.7rem 1.6rem;
+  border-radius: 999px;
+  font-family: "Overpass Mono", monospace;
+  font-size: 1rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-  margin-top: .5rem;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
-.translate-btn:hover {
-  background-color: #2cb2cd;
-  transform: scale(1.06);
-  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
+.translate-btn.primary {
+  border: 2px solid var(--tr-plum);
+  background-color: var(--tr-plum);
+  color: white;
+  box-shadow: 0 4px 12px rgba(108, 74, 182, 0.3);
+}
+
+.translate-btn.primary:hover {
+  border-color: var(--tr-plum-dark);
+  background-color: var(--tr-plum-dark);
+  transform: translateY(-2px);
+}
+
+.translate-btn.clear {
+  border: 2px solid var(--tr-line);
+  background-color: white;
+  color: var(--tr-ink);
+}
+
+.translate-btn.clear:hover {
+  border-color: var(--tr-peach);
+  background-color: var(--tr-peach);
 }
 
 .translate-btn:active {
   transform: scale(0.98);
 }
 
-.translate-btns {
+/* "Add to Liked Cards" sits on the left, Clear/Translate stay on the right */
+.translate-save {
   display: flex;
-  gap: 5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-right: auto;
+}
+
+.translate-btn.like {
+  border: 2px solid #ff8fa3;
+  background-color: white;
+  color: #d6336c;
+}
+
+.translate-btn.like:hover:not(:disabled) {
+  background-color: #ffe3e9;
+}
+
+.translate-btn.like:disabled {
+  border-color: #ff8fa3;
+  background-color: #ff8fa3;
+  color: white;
+  cursor: default;
+}
+
+.translate-login {
+  color: var(--tr-plum);
+  font-weight: 600;
+}
+
+.translate-save-error {
+  color: #d6336c;
+  font-size: 0.9rem;
+}
+
+@media screen and (max-width: 700px) {
+  .translate-btns {
+    flex-wrap: wrap;
+  }
+
+  .translate-save {
+    width: 100%;
+  }
+
+  .translate-page {
+    margin: 1rem;
+    padding: 1.25rem;
+  }
+
+  .translate-langs {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .translate-arrow {
+    align-self: center;
+    transform: rotate(90deg);
+  }
+
+  .translate-panels {
+    grid-template-columns: 1fr;
+  }
+
+  .translate-panels textarea {
+    min-height: 10rem;
+  }
+
+  .translate-input {
+    border-right: none !important;
+    border-bottom: 1px solid var(--tr-line) !important;
+  }
 }

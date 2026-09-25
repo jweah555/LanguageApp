@@ -1,4 +1,3 @@
-import "../pages/Decks.css";
 import "../pages/DeckCards.css";
 import { useEffect, useRef, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
@@ -81,9 +80,14 @@ function DeckCards() {
 
   if (message) {
     return (
-      <main className="deck-main">
-        <p>{message}</p>
-      </main>
+      <div className="study-page">
+        <div className="study-empty">
+          <p>{message}</p>
+          <Link to="/userDeck" className="study-link">
+            Back to decks
+          </Link>
+        </div>
+      </div>
     );
   }
 
@@ -94,81 +98,94 @@ function DeckCards() {
   const card = cards[index];
 
   return (
-    <main className="deck-main">
-      <section className="deck-section">
-        <div className="deck-cards-header">
-          <h3>{deck.deckName || deck.description}</h3>
-          <Link to="/userDeck" className="deck-cards-back">
-            Back to decks
+    <div className="study-page">
+      <div className="study-header">
+        <div>
+          {deck.language && <span className="study-language">{deck.language}</span>}
+          <h1 className="study-title">{deck.deckName || deck.description}</h1>
+        </div>
+        <Link to="/userDeck" className="study-link">
+          &larr; Back to decks
+        </Link>
+      </div>
+
+      {cards.length === 0 ? (
+        <div className="study-empty">
+          <h2>This deck has no cards yet</h2>
+          <p>Add a few cards and come back to study them.</p>
+          <Link to="/createCard" className="study-link">
+            + Add a card
           </Link>
         </div>
-
-        {cards.length === 0 ? (
-          <div className="card">
-            <p>This deck has no cards yet.</p>
-            <Link to="/createCard" className="deck-cards-back">
-              Add a card
-            </Link>
-          </div>
-        ) : (
-          <div className="card">
-            <div className="due-new">
-              <span>{card.language}</span>
-              <span>{showBack ? "Back" : "Front"}</span>
-            </div>
-            <div
-              className="flip-card deck-cards-swipe"
-              onPointerDown={handleSwipeStart}
-              onPointerUp={handleSwipeEnd}
-              onPointerCancel={() => (swipeStartX.current = null)}
-            >
-              {/* key makes a new card start on its front without animating */}
+      ) : (
+        <div className="study-body">
+          <div className="study-progress">
+            <span className="study-count">
+              Card {index + 1} of {cards.length}
+            </span>
+            <div className="study-progress-track">
               <div
-                key={card.cardId}
-                className={`flip-card-inner${showBack ? " flipped" : ""}`}
-              >
-                <div className="flip-card-face flip-card-front">
-                  <p>{card.front}</p>
-                </div>
-                <div className="flip-card-face flip-card-back">
-                  <p>{card.back}</p>
-                </div>
+                className="study-progress-fill"
+                style={{ width: `${((index + 1) / cards.length) * 100}%` }}
+              />
+            </div>
+          </div>
+
+          <div
+            className="flip-card deck-cards-swipe"
+            onPointerDown={handleSwipeStart}
+            onPointerUp={handleSwipeEnd}
+            onPointerCancel={() => (swipeStartX.current = null)}
+          >
+            {/* key makes a new card start on its front without animating */}
+            <div
+              key={card.cardId}
+              className={`flip-card-inner${showBack ? " flipped" : ""}`}
+            >
+              <div className="flip-card-face flip-card-front">
+                <span className="flip-card-label">Front</span>
+                <p>{card.front}</p>
+              </div>
+              <div className="flip-card-face flip-card-back">
+                <span className="flip-card-label">Back</span>
+                <p>{card.back}</p>
               </div>
             </div>
+          </div>
+
+          <div className="study-controls">
             <button
-              className="deck-cards-back deck-cards-flip"
+              className="deck-cards-arrow"
+              onClick={() => goTo(index - 1)}
+              disabled={index === 0}
+              aria-label="Previous card"
+            >
+              <img src={leftArrow} alt="" />
+            </button>
+
+            <button
+              className="deck-cards-flip"
               onClick={() => setShowBack((current) => !current)}
             >
               Flip
             </button>
-            <p className="deck-cards-hint">Tap the card or press Space to flip, swipe to move</p>
-            <div className="bottom-options">
-              <button
-                className="deck-cards-arrow"
-                onClick={() => goTo(index - 1)}
-                disabled={index === 0}
-                aria-label="Previous card"
-              >
-                <img src={leftArrow} alt="" />
-              </button>
 
-              <span className="card-count">
-                Card {index + 1}/{cards.length}
-              </span>
-
-              <button
-                className="deck-cards-arrow"
-                onClick={() => goTo(index + 1)}
-                disabled={index === cards.length - 1}
-                aria-label="Next card"
-              >
-                <img src={rightArrow} alt="" />
-              </button>
-            </div>
+            <button
+              className="deck-cards-arrow"
+              onClick={() => goTo(index + 1)}
+              disabled={index === cards.length - 1}
+              aria-label="Next card"
+            >
+              <img src={rightArrow} alt="" />
+            </button>
           </div>
-        )}
-      </section>
-    </main>
+
+          <p className="deck-cards-hint">
+            Tap the card or press Space to flip &middot; swipe or use the arrow keys to move
+          </p>
+        </div>
+      )}
+    </div>
   );
 }
 

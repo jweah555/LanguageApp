@@ -1,0 +1,228 @@
+/* ---------- Deck view (read-only card list) ---------- */
+
+.deck-view-page {
+  --dv-navy: #131d4f;
+  --dv-muted: #5b6285;
+  --dv-sky: #6fb8e0;
+  --dv-teal: #5ccfb8;
+  --dv-coral: #ff9e87;
+  --dv-cream: #fdf6ea;
+  --dv-line: rgba(19, 29, 79, 0.08);
+
+  max-width: 1000px;
+  margin: 2rem auto 3rem;
+  padding: 2rem;
+  border-radius: 24px;
+  background-color: #f3f7fa;
+  color: var(--dv-navy);
+  font-family: "Varela Round", sans-serif;
+}
+
+.deck-view-back {
+  display: inline-block;
+  margin-bottom: 1.25rem;
+  color: var(--dv-muted);
+  text-decoration: none;
+  font-family: "Overpass Mono", monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.deck-view-back:hover {
+  color: var(--dv-navy);
+  text-decoration: underline;
+}
+
+.deck-view-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.deck-view-language {
+  display: inline-block;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background-color: #e1f0f8;
+  font-family: "Overpass Mono", monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.deck-view-title {
+  margin: 0.5rem 0 0;
+  font-family: "Raleway", sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  word-break: break-word;
+}
+
+.deck-view-description {
+  margin: 0.4rem 0 0;
+  max-width: 40rem;
+  color: var(--dv-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.deck-view-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.deck-view-button {
+  padding: 0.6rem 1.3rem;
+  border-radius: 999px;
+  font-family: "Overpass Mono", monospace;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.deck-view-button.primary {
+  border: 2px solid var(--dv-navy);
+  background-color: var(--dv-navy);
+  color: white;
+}
+
+.deck-view-button.primary:hover {
+  border-color: var(--dv-coral);
+  background-color: var(--dv-coral);
+  color: var(--dv-navy);
+}
+
+.deck-view-button.secondary {
+  border: 2px solid var(--dv-sky);
+  background-color: white;
+  color: var(--dv-navy);
+}
+
+.deck-view-button.secondary:hover {
+  background-color: var(--dv-sky);
+}
+
+.deck-view-count {
+  margin: 1.75rem 0 0.75rem;
+  font-family: "Overpass Mono", monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--dv-muted);
+}
+
+/* Card list: number | front | back */
+.deck-view-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  border: 1px solid var(--dv-line);
+  border-radius: 18px;
+  background-color: white;
+  box-shadow: 0 4px 14px rgba(19, 29, 79, 0.08);
+}
+
+.deck-view-row {
+  display: grid;
+  grid-template-columns: 3rem 1fr 1fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--dv-line);
+}
+
+.deck-view-row:first-child {
+  border-top: none;
+}
+
+.deck-view-row:nth-child(odd):not(.deck-view-labels) {
+  background-color: #fafcfd;
+}
+
+.deck-view-labels {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  background-color: var(--dv-cream);
+  font-family: "Overpass Mono", monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--dv-muted);
+}
+
+.deck-view-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: rgba(92, 207, 184, 0.3);
+  font-family: "Overpass Mono", monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.deck-view-front {
+  font-size: 1.1rem;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.deck-view-back-text {
+  color: var(--dv-muted);
+  word-break: break-word;
+}
+
+/* Shown when the deck is empty or failed to load */
+.deck-view-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1rem;
+  border: 2px dashed var(--dv-sky);
+  border-radius: 18px;
+  background-color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+}
+
+.deck-view-empty h2 {
+  margin: 0 0 0.5rem;
+  font-family: "Raleway", sans-serif;
+}
+
+.deck-view-empty p {
+  margin: 0 0 1rem;
+  color: var(--dv-muted);
+}
+
+@media screen and (max-width: 600px) {
+  .deck-view-page {
+    margin: 1rem;
+    padding: 1.25rem;
+  }
+
+  .deck-view-title {
+    font-size: 1.7rem;
+  }
+
+  .deck-view-labels {
+    display: none;
+  }
+
+  /* Stack front above back on small screens */
+  .deck-view-row {
+    grid-template-columns: 2.5rem 1fr;
+    row-gap: 0.25rem;
+  }
+
+  .deck-view-back-text {
+    grid-column: 2;
+  }
+}
