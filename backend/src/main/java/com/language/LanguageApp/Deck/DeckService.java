@@ -49,6 +49,7 @@ public class DeckService {
     public Deck updateDeck(Long deckId, Deck updatedDeck) {
         Deck existingDeck = deckRepository.findById(deckId)
         .orElseThrow(() -> new ResourceNotFoundException("Deck with ID " + deckId + "not found"));
+        existingDeck.setDeckName(updatedDeck.getDeckName());
         existingDeck.setDescription(updatedDeck.getDescription());
         existingDeck.setLanguage(updatedDeck.getLanguage());
 

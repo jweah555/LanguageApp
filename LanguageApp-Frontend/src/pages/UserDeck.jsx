@@ -28,19 +28,26 @@ function UserDeck() {
 
   return (
     <main className="card-page-main">
-      <h1>Your Decks</h1>
-
-      <Link to="/createDeck">
-        <button className="card-button">Create Deck</button>
-      </Link>
+      <div className="user-deck-header">
+        <h1>Your Decks</h1>
+        <Link to="/createDeck" className="create-deck-link">
+          Create Deck
+        </Link>
+      </div>
 
       <div className="deck-card-container">
         {decks.map((deck) => (
           <div className="card-page" key={deck.deckId}>
-            <h2 className="card-header">{deck.description}</h2>
-            <p className="card-text">{deck.language}</p>
+            <Link to={`/userDeck/${deck.deckId}`} className="deck-open-link">
+              <h2 className="card-header">{deck.deckName || deck.description}</h2>
+              <p className="card-text">{deck.description}</p>
+              <p className="card-text">{deck.language}</p>
+            </Link>
             <hr />
             <div className="card-bottom">
+              <Link to={`/userDeck/${deck.deckId}`}>
+                <button className="card-button">View</button>
+              </Link>
               <Link to="/createCard">
                 <button className="card-button">Add</button>
               </Link>

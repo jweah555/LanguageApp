@@ -25,7 +25,7 @@ function DeckSelection() {
         <div className="deck-card-container">
           {decks.map((deck) => (
             <div className="card-page" key={deck.deckId}>
-              <h2 className="card-header">{deck.description}</h2>
+              <h2 className="card-header">{deck.deckName || deck.description}</h2>
               <p className="card-text">{deck.language}</p>
               <hr />
               <div className="card-bottom">

@@ -29,6 +29,10 @@ public class Deck {
     @Column(name = "language",nullable = true)
     private String language;
 
+    //Title shown for the deck in the frontend
+    @Column(name = "deck_name", nullable = true)
+    private String deckName;
+
     @Column(name = "name",nullable = true)
     private String description;
 
@@ -80,6 +84,14 @@ public class Deck {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    public String getDeckName() {
+        return this.deckName;
+    }
+
+    public void setDeckName(String deckName) {
+        this.deckName = deckName;
     }
 
     public String getDescription() {

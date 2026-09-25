@@ -72,3 +72,32 @@
     height: 3.2rem;
   }
 }
+
+.user-deck-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.create-deck-link {
+  padding: 0.7rem 1rem;
+  border-radius: 15px;
+  background-color: #8ccdeb;
+  color: inherit;
+  text-decoration: none;
+  font-family: "Overpass Mono", monospace;
+  font-size: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.create-deck-link:hover {
+  background-color: #ffb4a2;
+}
+
+.deck-open-link {
+  width: 100%;
+  color: inherit;
+  text-decoration: none;
+  text-align: center;
+}

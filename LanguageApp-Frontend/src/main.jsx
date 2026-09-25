@@ -14,6 +14,7 @@ import LoginSignUp from "./pages/LoginSignUp.jsx";
 import CreateDeck from "./pages/CreateDeck.jsx";
 import CreateCard from "./pages/CreateCard.jsx";
 import UserDeck from "./pages/UserDeck.jsx";
+import DeckCards from "./pages/DeckCards.jsx";
 import Profile from "./pages/Profile.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
       { path: "createDeck", element: <CreateDeck /> },
       { path: "createCard", element: <CreateCard /> },
       { path: "userDeck", element: <UserDeck /> },
+      { path: "userDeck/:deckId", element: <DeckCards /> },
       { path: "profile", element: <Profile /> },
     ],
   },

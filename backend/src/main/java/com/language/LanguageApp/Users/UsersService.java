@@ -82,6 +82,7 @@ public class UsersService {
 
         Deck personalDeck = new Deck();
         personalDeck.setLanguage(newUser.getLanguage());
+        personalDeck.setDeckName("Liked Cards");
         personalDeck.setDescription("Liked Cards");
         personalDeck.setDefault(true);
         personalDeck.setOwner(newUser);
