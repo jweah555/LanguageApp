@@ -15,6 +15,8 @@ import CreateCard from "./pages/CreateCard.jsx";
 import UserDeck from "./pages/UserDeck.jsx";
 import DeckCards from "./pages/DeckCards.jsx";
 import DeckView from "./pages/DeckView.jsx";
+import SpacedRepetition from "./pages/SpacedRepetition.jsx";
+import Review from "./pages/Review.jsx";
 import Profile from "./pages/Profile.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 // Loaded after the pages so dark mode overrides their styles
@@ -36,6 +38,8 @@ const router = createBrowserRouter([
       { path: "userDeck", element: <UserDeck /> },
       { path: "userDeck/:deckId", element: <DeckCards /> },
       { path: "userDeck/:deckId/view", element: <DeckView /> },
+      { path: "spacedRepetition", element: <SpacedRepetition /> },
+      { path: "spacedRepetition/:deckId", element: <Review /> },
       { path: "profile", element: <Profile /> },
     ],
   },

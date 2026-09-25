@@ -43,6 +43,16 @@ function UserDeck() {
         </Link>
       </div>
 
+      <div className="study-mode-bar">
+        <p>
+          <strong>Chronological study.</strong> Studying here goes through each deck's cards in
+          the order they were added.
+        </p>
+        <Link to="/spacedRepetition" className="study-mode-link">
+          Study with spaced repetition &rarr;
+        </Link>
+      </div>
+
       {decks.length === 0 ? (
         <div className="user-deck-empty">
           <h2>No decks yet</h2>

@@ -8,7 +8,7 @@ export const StudySelect = [
     id: 1,
     image: repeat,
     text: "Spaced Rep Deck",
-    pageLink: "/userDeck",
+    pageLink: "/spacedRepetition",
   },
   {
     id: 2,

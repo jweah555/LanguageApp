@@ -15,6 +15,7 @@ function DeckCards() {
   const [cards, setCards] = useState([]);
   const [index, setIndex] = useState(0);
   const [showBack, setShowBack] = useState(false);
+  const [finished, setFinished] = useState(false); // true after moving past the last card
   const [message, setMessage] = useState("");
   const swipeStartX = useRef(null);
 
@@ -32,14 +33,30 @@ function DeckCards() {
   }, [user, deckId]);
 
   const goTo = (newIndex) => {
-    if (newIndex < 0 || newIndex >= cards.length) return;
+    if (newIndex < 0) return;
+    // Moving past the last card ends the run through the deck
+    if (newIndex >= cards.length) {
+      setFinished(true);
+      return;
+    }
     setIndex(newIndex);
     setShowBack(false);
+  };
+
+  const startOver = () => {
+    setIndex(0);
+    setShowBack(false);
+    setFinished(false);
   };
 
   // Left/right arrow keys move between cards, Space flips
   useEffect(() => {
     const handleKey = (e) => {
+      if (finished) {
+        // Left arrow goes back to the last card; nothing to flip on the finished screen
+        if (e.key === "ArrowLeft") setFinished(false);
+        return;
+      }
       if (e.key === "ArrowLeft") goTo(index - 1);
       if (e.key === "ArrowRight") goTo(index + 1);
       if (e.key === " ") {
@@ -117,6 +134,33 @@ function DeckCards() {
             + Add a card
           </Link>
         </div>
+      ) : finished ? (
+        <div className="study-body">
+          <div className="study-progress">
+            <span className="study-count">Done!</span>
+            <div className="study-progress-track">
+              <div className="study-progress-fill" style={{ width: "100%" }} />
+            </div>
+          </div>
+
+          <div className="study-finished">
+            <div className="study-finished-icon" aria-hidden="true">
+              ✓
+            </div>
+            <h2>You finished the deck!</h2>
+            <p>
+              You went through all {cards.length} {cards.length === 1 ? "card" : "cards"}.
+            </p>
+            <div className="study-finished-actions">
+              <button type="button" className="deck-cards-flip" onClick={startOver}>
+                ↺ Start over
+              </button>
+              <Link to="/userDeck" className="study-link">
+                Back to decks
+              </Link>
+            </div>
+          </div>
+        </div>
       ) : (
         <div className="study-body">
           <div className="study-progress">
@@ -173,8 +217,7 @@ function DeckCards() {
             <button
               className="deck-cards-arrow"
               onClick={() => goTo(index + 1)}
-              disabled={index === cards.length - 1}
-              aria-label="Next card"
+              aria-label={index === cards.length - 1 ? "Finish deck" : "Next card"}
             >
               <img src={rightArrow} alt="" />
             </button>

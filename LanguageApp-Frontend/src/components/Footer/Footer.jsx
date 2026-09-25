@@ -16,6 +16,7 @@ function Footer() {
   const isCreatePage = location.pathname === "/createDeck";
   const isCreateCardPage = location.pathname === "/createCard";
   const isUserDeck = location.pathname === "/userDeck";
+  const isSpacedRepetition = location.pathname === "/spacedRepetition";
   const isProfilePage = location.pathname === "/profile";
 
   return (
@@ -30,6 +31,7 @@ function Footer() {
 
       {!isProfilePage &&
         !isUserDeck &&
+        !isSpacedRepetition &&
         !isCreateCardPage &&
         !isCreatePage &&
         !isLoginSignUpPage &&

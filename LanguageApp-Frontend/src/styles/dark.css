@@ -293,6 +293,33 @@
   color: #12151f;
 }
 
+:root[data-theme="dark"] .study-mode-bar {
+  border-color: var(--dark-line);
+  background-color: var(--dark-surface);
+}
+
+:root[data-theme="dark"] .study-mode-bar strong,
+:root[data-theme="dark"] .study-mode-link {
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .study-mode-link:hover {
+  color: #12151f;
+}
+
+:root[data-theme="dark"] .sr-count.new {
+  background-color: #243349;
+  color: #cfe6f7;
+}
+
+:root[data-theme="dark"] .review-flip:focus-visible {
+  outline-color: var(--study-sky);
+}
+
+:root[data-theme="dark"] .sr-note {
+  background-color: var(--dark-surface);
+}
+
 :root[data-theme="dark"] .user-deck-empty {
   background-color: rgba(255, 255, 255, 0.03);
 }
@@ -390,6 +417,11 @@
 
 :root[data-theme="dark"] .deck-cards-arrow:hover:not(:disabled) img {
   filter: none;
+}
+
+:root[data-theme="dark"] .study-finished {
+  background-color: var(--dark-surface);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 :root[data-theme="dark"] .study-empty {

@@ -1,12 +1,16 @@
 import "../pages/DeckView.css";
 import { useEffect, useState } from "react";
-import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import DeleteDeckModal from "../components/DeleteDeckModal/DeleteDeckModal";
 import { deckDisplayName, isLikedDeck } from "../utils/deck";
 
 function DeckView() {
   const { deckId } = useParams();
+  // Opened from the Spaced Repetition page: view and study only, no editing
+  const [searchParams] = useSearchParams();
+  const fromPractice = searchParams.get("from") === "practice";
+  const backLink = fromPractice ? "/spacedRepetition" : "/userDeck";
   const { user, loading } = useAuth();
   const [deck, setDeck] = useState(null);
   const [cards, setCards] = useState([]);
@@ -40,7 +44,7 @@ function DeckView() {
       <div className="deck-view-page">
         <div className="deck-view-empty">
           <p>{message}</p>
-          <Link to="/userDeck" className="deck-view-button secondary">
+          <Link to={backLink} className="deck-view-button secondary">
             Back to decks
           </Link>
         </div>
@@ -54,8 +58,8 @@ function DeckView() {
 
   return (
     <div className="deck-view-page">
-      <Link to="/userDeck" className="deck-view-back">
-        &larr; Back to decks
+      <Link to={backLink} className="deck-view-back">
+        &larr; {fromPractice ? "Back to Spaced Repetition" : "Back to decks"}
       </Link>
 
       <div className="deck-view-header">
@@ -69,15 +73,20 @@ function DeckView() {
           )}
         </div>
         <div className="deck-view-actions">
-          <Link to="/createCard" className="deck-view-button secondary">
-            + Add card
-          </Link>
+          {!fromPractice && (
+            <Link to="/createCard" className="deck-view-button secondary">
+              + Add card
+            </Link>
+          )}
           {cards.length > 0 && (
-            <Link to={`/userDeck/${deck.deckId}`} className="deck-view-button primary">
+            <Link
+              to={fromPractice ? `/spacedRepetition/${deck.deckId}` : `/userDeck/${deck.deckId}`}
+              className="deck-view-button primary"
+            >
               Study
             </Link>
           )}
-          {!isLikedDeck(deck) && (
+          {!fromPractice && !isLikedDeck(deck) && (
             <button
               type="button"
               className="deck-view-button deck-view-delete"
@@ -96,7 +105,11 @@ function DeckView() {
       {cards.length === 0 ? (
         <div className="deck-view-empty">
           <h2>This deck has no cards yet</h2>
-          <p>Add a few cards to start building your deck.</p>
+          <p>
+            {fromPractice
+              ? "Add cards from Your Decks, then come back to practice."
+              : "Add a few cards to start building your deck."}
+          </p>
         </div>
       ) : (
         <ol className="deck-view-list">

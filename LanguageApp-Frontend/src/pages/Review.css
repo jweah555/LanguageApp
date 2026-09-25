@@ -1,0 +1,128 @@
+/* ---------- Spaced repetition review (builds on the study page styles) ---------- */
+
+.review-status {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  min-height: 1.8rem;
+  margin: 1.25rem 0 0;
+  color: var(--study-muted);
+  font-size: 0.9rem;
+}
+
+.review-badge {
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-family: "Overpass Mono", monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.review-badge.new {
+  background-color: var(--study-sky);
+  color: white;
+}
+
+.review-badge.review {
+  background-color: var(--study-teal);
+  color: white;
+}
+
+.review-badge.practice {
+  background-color: var(--study-pink);
+  color: var(--study-indigo);
+}
+
+/* The flip card is a button here so it can be clicked or focused */
+.review-flip {
+  display: block;
+  margin-top: 0.75rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}
+
+.review-flip:focus-visible {
+  outline: 3px solid var(--study-sky);
+  outline-offset: 6px;
+  border-radius: 20px;
+}
+
+/* Forgot / Hard / Medium / Easy */
+.review-ratings {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.review-rating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.75rem 0.5rem;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  color: white;
+  font-family: "Overpass Mono", monospace;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.review-rating:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+.review-rating:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.review-rating-label {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.review-rating-days {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.review-rating.forgot {
+  background-color: #e5484d;
+}
+
+.review-rating.hard {
+  background-color: var(--study-pink);
+  color: var(--study-indigo);
+}
+
+.review-rating.medium {
+  background-color: var(--study-sky);
+  color: var(--study-indigo);
+}
+
+.review-rating.easy {
+  background-color: var(--study-teal);
+}
+
+.review-error {
+  margin: 0.75rem 0 0;
+  color: #d93a40;
+  font-size: 0.9rem;
+}
+
+@media screen and (max-width: 600px) {
+  .review-ratings {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,0 +1,59 @@
+/* ---------- Spaced Repetition page (reuses the Your Decks card styles) ---------- */
+
+.sr-note {
+  margin-bottom: 2rem;
+  padding: 1rem 1.25rem;
+  border-left: 5px solid var(--ud-teal);
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(19, 29, 79, 0.06);
+}
+
+.sr-note h2 {
+  margin: 0 0 0.35rem;
+  font-family: "Raleway", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.sr-note p {
+  margin: 0;
+  color: var(--ud-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.sr-header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.sr-deck-counts {
+  display: flex;
+  gap: 0.4rem;
+  margin: 0.6rem 0 0;
+}
+
+.sr-count {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-family: "Overpass Mono", monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.sr-count.due {
+  background-color: rgba(255, 158, 135, 0.3);
+}
+
+.sr-count.new {
+  background-color: #e1f0f8;
+}
+
+.sr-empty-deck {
+  color: var(--ud-muted);
+  font-family: "Overpass Mono", monospace;
+  font-size: 0.85rem;
+}

@@ -242,6 +242,55 @@
   text-align: center;
 }
 
+/* Shown after moving past the last card */
+.study-finished {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 3rem 1.5rem;
+  border-top: 8px solid var(--study-teal);
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 0 10px 30px rgba(66, 91, 154, 0.15);
+  text-align: center;
+}
+
+.study-finished-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  background-color: var(--study-teal);
+  color: white;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.study-finished h2 {
+  margin: 0 0 0.4rem;
+  font-family: "Raleway", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.study-finished p {
+  margin: 0 0 1.75rem;
+  color: var(--study-muted);
+}
+
+.study-finished-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 /* Shown when the deck is empty or failed to load */
 .study-empty {
   display: flex;

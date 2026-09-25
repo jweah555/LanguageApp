@@ -8,6 +8,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.language.LanguageApp.Card.Card;
+import com.language.LanguageApp.Users.Users;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,13 +18,16 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 //One row per review of a card
 @Entity
-@Table(name = "review_log")
+@Table(name = "review_log", indexes = {
+        @Index(name = "idx_review_log_user_reviewed_at", columnList = "user_id, reviewed_at")
+})
 public class ReviewLog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +40,15 @@ public class ReviewLog {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Card card;
+
+    //Who did the review; stored directly so per-user counts don't need to join through card and deck.
+    //Nullable here only so ddl-auto can add it to a table with rows; ReviewLogUserMigration
+    //fills old rows and then makes the column NOT NULL.
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Users user;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "rating", nullable = false, length = 10)
@@ -53,7 +66,8 @@ public class ReviewLog {
     public ReviewLog() {
     }
 
-    public ReviewLog(Card card, Rating rating, boolean practice) {
+    public ReviewLog(Users user, Card card, Rating rating, boolean practice) {
+        this.user = user;
         this.card = card;
         this.rating = rating;
         this.practice = practice;
@@ -69,6 +83,14 @@ public class ReviewLog {
 
     public void setCard(Card card) {
         this.card = card;
+    }
+
+    public Users getUser() {
+        return this.user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
     }
 
     public Rating getRating() {

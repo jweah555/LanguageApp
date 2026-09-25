@@ -57,6 +57,49 @@
   transform: translateY(-2px);
 }
 
+/* Says which way of studying this page uses, with a link to the other one */
+.study-mode-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  margin-bottom: 1.5rem;
+  padding: 0.85rem 1.25rem;
+  border: 1px solid rgba(19, 29, 79, 0.08);
+  border-radius: 14px;
+  background-color: white;
+}
+
+.study-mode-bar p {
+  flex: 1 1 18rem;
+  margin: 0;
+  color: var(--ud-muted);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.study-mode-bar strong {
+  color: var(--ud-navy);
+}
+
+.study-mode-link {
+  flex-shrink: 0;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--ud-teal);
+  border-radius: 999px;
+  color: var(--ud-navy);
+  font-family: "Overpass Mono", monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.study-mode-link:hover {
+  background-color: var(--ud-teal);
+}
+
 /* Grid of deck cards */
 .user-deck-grid {
   display: grid;
