@@ -43,14 +43,6 @@ public class CardService {
         return cards;
     }
 
-    public List<Card> getCardsByStatus(String status) {
-        List<Card> cards = cardRepository.findByStatus(status);
-        if (cards.isEmpty()) {
-            throw new ResourceNotFoundException("No card found with the status " + status);
-        }
-        return cards;
-    }
-
     public Card addCard(Long deckId, Card card, Users currentUser) {
         if (card == null) {
             throw new BadRequestException("Card object must not be null");
@@ -68,7 +60,6 @@ public class CardService {
         Card existingCard = cardRepository.findById(cardId).orElseThrow(() -> new ResourceNotFoundException("Card not found"));
         existingCard.setFront(updatedCard.getFront());
         existingCard.setLanguage(updatedCard.getLanguage());
-        existingCard.setStatus(updatedCard.getStatus());
         existingCard.setBack(updatedCard.getBack());
 
         return cardRepository.save(existingCard);

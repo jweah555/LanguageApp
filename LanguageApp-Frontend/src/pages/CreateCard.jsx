@@ -3,6 +3,7 @@ import "../pages/CreateForm.css";
 import { useEffect, useRef, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { deckDisplayName } from "../utils/deck";
+import { LANGUAGES, toLanguageOption } from "../utils/languages";
 import { useAuth } from "../context/AuthContext";
 
 // Each row in "Multiple cards" mode needs a stable id for React keys
@@ -42,8 +43,10 @@ function CreateCard() {
     const selectedId = e.target.value;
     setDeckId(selectedId);
     const selectedDeck = decks.find((deck) => String(deck.deckId) === selectedId);
-    if (selectedDeck && selectedDeck.language) {
-      setLanguage(selectedDeck.language);
+    // Older decks may have free-typed languages; only fill in ones that match an option
+    const deckLanguage = toLanguageOption(selectedDeck?.language);
+    if (deckLanguage) {
+      setLanguage(deckLanguage);
     }
   };
 
@@ -174,13 +177,22 @@ function CreateCard() {
         </select>
       </label>
       <label className="create-field">
-        <span>Language</span>
-        <input
+        <span>Language you're learning</span>
+        <select
+          className="create-select"
           onChange={(e) => setLanguage(e.target.value)}
           value={language}
-          placeholder="e.g. Spanish"
           required
-        />
+        >
+          <option value="" disabled>
+            Choose a language
+          </option>
+          {LANGUAGES.map((lang) => (
+            <option key={lang} value={lang}>
+              {lang}
+            </option>
+          ))}
+        </select>
       </label>
     </div>
   );

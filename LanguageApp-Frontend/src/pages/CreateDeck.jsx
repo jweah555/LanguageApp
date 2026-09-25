@@ -2,6 +2,7 @@ import "../pages/CreateForm.css";
 import { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { LANGUAGES } from "../utils/languages";
 
 function CreateDeck() {
   const { user, loading } = useAuth();
@@ -58,13 +59,22 @@ function CreateDeck() {
             />
           </label>
           <label className="create-field">
-            <span>Language</span>
-            <input
+            <span>Language you're learning</span>
+            <select
+              className="create-select"
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
-              placeholder="e.g. Spanish"
               required
-            />
+            >
+              <option value="" disabled>
+                Choose a language
+              </option>
+              {LANGUAGES.map((lang) => (
+                <option key={lang} value={lang}>
+                  {lang}
+                </option>
+              ))}
+            </select>
           </label>
           <label className="create-field">
             <span>Description</span>

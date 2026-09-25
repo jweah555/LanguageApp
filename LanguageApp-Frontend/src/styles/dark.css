@@ -521,6 +521,7 @@
   background-color: var(--dark-surface);
 }
 
+:root[data-theme="dark"] .profile-field .profile-select,
 :root[data-theme="dark"] .profile-field input {
   color: var(--dark-text);
 }

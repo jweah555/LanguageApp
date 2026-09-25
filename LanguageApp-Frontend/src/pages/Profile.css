@@ -208,6 +208,19 @@
   color: var(--pf-navy);
 }
 
+.profile-field .profile-select {
+  height: 2.6rem;
+  padding: 0 0.8rem;
+  border: 1px solid #cfd4e0;
+  border-radius: 10px;
+  background-color: white;
+  color: var(--pf-navy);
+  font-family: "Varela Round", sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.profile-field .profile-select:focus,
 .profile-field input:focus {
   outline: 2px solid var(--pf-sky);
   outline-offset: 1px;

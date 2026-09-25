@@ -1,6 +1,12 @@
 package com.language.LanguageApp.Card;
 
+import java.time.Instant;
+import java.time.LocalDate;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.language.LanguageApp.Deck.Deck;
 
 import jakarta.persistence.Column;
@@ -22,9 +28,6 @@ public class Card {
     @Column(name = "language",nullable = false)
     private String language;
 
-    @Column(name = "status",nullable = true)
-    private String status;
-
     //Word or phrase in the target language
     @Column(name = "front", nullable = false)
     private String front;
@@ -33,6 +36,38 @@ public class Card {
     @Column(name = "back", nullable = false)
     private String back;
 
+    // ---- Spaced repetition ----
+    // These are read-only over JSON: only the review logic should change them,
+    // never a create/update request from the client.
+    // columnDefinition carries the SQL defaults so ddl-auto can add the NOT NULL
+    // columns to a table that already has rows.
+
+    //Position on the 0-6 ladder; 6 = mastered
+    @Column(name = "level", nullable = false, columnDefinition = "smallint not null default 0")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private short level = 0;
+
+    //Next day the card should be reviewed; null = new card, never reviewed
+    @Column(name = "due_date")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private LocalDate dueDate;
+
+    //Day of the last counted review; blocks same-day repeats from counting
+    @Column(name = "last_reviewed_on")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private LocalDate lastReviewedOn;
+
+    //Times the card was forgotten
+    @Column(name = "lapses", nullable = false, columnDefinition = "integer not null default 0")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private int lapses = 0;
+
+    //When the card was created; orders new cards
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false,
+            columnDefinition = "timestamp with time zone not null default now()")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Instant createdAt;
 
     //Deck this card belongs to; a card always belongs to exactly one deck
     @ManyToOne
@@ -43,18 +78,16 @@ public class Card {
     public Card() {
     }
 
-    public Card(Long cardId, String language, String status, String front, String back, Deck deck) {
+    public Card(Long cardId, String language, String front, String back, Deck deck) {
         this.cardId = cardId;
         this.language = language;
-        this.status = status;
         this.front = front;
         this.back = back;
         this.deck = deck;
     }
 
-    public Card(String language, String status, String front, String back, Deck deck) {
+    public Card(String language, String front, String back, Deck deck) {
         this.language = language;
-        this.status = status;
         this.front = front;
         this.back = back;
         this.deck = deck;
@@ -77,14 +110,6 @@ public class Card {
         this.language = language;
     }
 
-    public String getStatus() {
-        return this.status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public String getFront() {
         return this.front;
     }
@@ -99,6 +124,42 @@ public class Card {
 
     public void setBack(String back) {
         this.back = back;
+    }
+
+    public short getLevel() {
+        return this.level;
+    }
+
+    public void setLevel(short level) {
+        this.level = level;
+    }
+
+    public LocalDate getDueDate() {
+        return this.dueDate;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public LocalDate getLastReviewedOn() {
+        return this.lastReviewedOn;
+    }
+
+    public void setLastReviewedOn(LocalDate lastReviewedOn) {
+        this.lastReviewedOn = lastReviewedOn;
+    }
+
+    public int getLapses() {
+        return this.lapses;
+    }
+
+    public void setLapses(int lapses) {
+        this.lapses = lapses;
+    }
+
+    public Instant getCreatedAt() {
+        return this.createdAt;
     }
 
     public Deck getDeck() {

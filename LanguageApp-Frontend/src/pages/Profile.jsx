@@ -3,6 +3,7 @@ import "../pages/Profile.css";
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { LANGUAGES, toLanguageOption } from "../utils/languages";
 
 const API_BASE = "http://localhost:8080";
 
@@ -39,7 +40,7 @@ function Profile() {
     setForm({
       firstName: user.firstName ?? "",
       lastName: user.lastName ?? "",
-      language: user.language ?? "",
+      language: toLanguageOption(user.language),
     });
     setMessage(null);
     setEditing(true);
@@ -104,7 +105,7 @@ function Profile() {
         </div>
         <div className="profile-stat">
           <span className="profile-stat-value small">{user.language || "—"}</span>
-          <span className="profile-stat-label">Learning</span>
+          <span className="profile-stat-label">Native language</span>
         </div>
       </section>
 
@@ -135,8 +136,23 @@ function Profile() {
               <input name="lastName" value={form.lastName} onChange={handleChange} required />
             </label>
             <label className="profile-field">
-              <span>Language</span>
-              <input name="language" value={form.language} onChange={handleChange} required />
+              <span>Native language</span>
+              <select
+                name="language"
+                className="profile-select"
+                value={form.language}
+                onChange={handleChange}
+                required
+              >
+                <option value="" disabled>
+                  Choose a language
+                </option>
+                {LANGUAGES.map((lang) => (
+                  <option key={lang} value={lang}>
+                    {lang}
+                  </option>
+                ))}
+              </select>
             </label>
             <label className="profile-field">
               <span>Username</span>
@@ -176,7 +192,7 @@ function Profile() {
               <dd>{user.userName}</dd>
             </div>
             <div>
-              <dt>Language</dt>
+              <dt>Native language</dt>
               <dd>{user.language}</dd>
             </div>
             <div>

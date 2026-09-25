@@ -43,6 +43,23 @@ public class Users {
     @Column(name = "language",nullable = false)
     private String language;
 
+    // ---- Spaced repetition settings ----
+    // columnDefinition carries the SQL defaults so ddl-auto can add the NOT NULL
+    // columns to a table that already has rows.
+
+    //Most reviews shown per day; the rest overflow to the next day
+    @Column(name = "daily_review_cap", nullable = false, columnDefinition = "integer not null default 30")
+    private int dailyReviewCap = 30;
+
+    //New cards introduced per day
+    @Column(name = "new_cards_per_day", nullable = false, columnDefinition = "integer not null default 10")
+    private int newCardsPerDay = 10;
+
+    //IANA zone like America/New_York; defines the user's "today"
+    @Column(name = "timezone", nullable = false, length = 64,
+            columnDefinition = "varchar(64) not null default 'UTC'")
+    private String timezone = "UTC";
+
     // Decks owned by this user
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties("owner") // Prevents recursion during JSON serialization
@@ -140,6 +157,30 @@ public class Users {
 
     public String getUserName() {
         return this.userName;
+    }
+
+    public int getDailyReviewCap() {
+        return this.dailyReviewCap;
+    }
+
+    public void setDailyReviewCap(int dailyReviewCap) {
+        this.dailyReviewCap = dailyReviewCap;
+    }
+
+    public int getNewCardsPerDay() {
+        return this.newCardsPerDay;
+    }
+
+    public void setNewCardsPerDay(int newCardsPerDay) {
+        this.newCardsPerDay = newCardsPerDay;
+    }
+
+    public String getTimezone() {
+        return this.timezone;
+    }
+
+    public void setTimezone(String timezone) {
+        this.timezone = timezone;
     }
 
     @Override

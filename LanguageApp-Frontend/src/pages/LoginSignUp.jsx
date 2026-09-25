@@ -4,6 +4,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { LANGUAGES } from "../utils/languages";
 
 function LoginSignUp({ initialMode = "signup" }) {
   const [mode, setMode] = useState(initialMode);
@@ -31,6 +32,10 @@ function LoginSignUp({ initialMode = "signup" }) {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    if (!language) {
+      alert("Please choose your native language.");
+      return;
+    }
     const user = { firstName, lastName, userName, password, role, language };
 
     const response = await fetch("http://localhost:8080/users", {
@@ -92,13 +97,24 @@ function LoginSignUp({ initialMode = "signup" }) {
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
               ></input>
-              <input
-                className="user-input"
-                placeholder=" Language"
-                type="text"
-                value={language}
-                onChange={(e) => setLanguage(e.target.value)}
-              ></input>
+              <label className="native-language">
+                <span>Native language</span>
+                <select
+                  className="user-input user-select"
+                  value={language}
+                  onChange={(e) => setLanguage(e.target.value)}
+                  required
+                >
+                  <option value="" disabled>
+                    The language you already speak
+                  </option>
+                  {LANGUAGES.map((lang) => (
+                    <option key={lang} value={lang}>
+                      {lang}
+                    </option>
+                  ))}
+                </select>
+              </label>
               <input
                 className="user-input"
                 placeholder=" Role"

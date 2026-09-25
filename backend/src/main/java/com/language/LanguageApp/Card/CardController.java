@@ -45,12 +45,6 @@ public class CardController {
         return ResponseEntity.ok(newCard);
     }
 
-    @GetMapping("/cards/status/{status}")
-    public ResponseEntity<List<Card>> getCardsByStatus(@PathVariable("status") String status) {
-        List<Card> newCard = cardService.getCardsByStatus(status);
-        return ResponseEntity.ok(newCard);
-    }
-
     @PutMapping("/cards/update/{cardId}")
     public ResponseEntity<Card> updateCard(@PathVariable("cardId") Long cardId, @RequestBody Card updatedCard) {
         Card newCard = cardService.updateCardById(cardId, updatedCard);
