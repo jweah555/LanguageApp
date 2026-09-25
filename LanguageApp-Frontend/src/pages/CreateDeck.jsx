@@ -1,6 +1,6 @@
-import "../pages/CreateDeck.css";
+import "../pages/CreateForm.css";
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 function CreateDeck() {
@@ -40,31 +40,56 @@ function CreateDeck() {
 
 
   return (
-    <main>
-      <div className="create-deck-container">
-        <h1>Create Deck</h1>
-        <form onSubmit={handleSubmit} id="create-deck">
-          <input onChange={(e) => setDeckName(e.target.value)}
-            placeholder=" Enter Deck Name"
-            className="deck-name"
-            required
-          ></input>
-          <input onChange={(e) => setLanguage(e.target.value)}
-            placeholder=" Enter Deck Language"
-            className="deck-language"
-            required
-          ></input>
-          <input 
-          onChange={(e) => setDescription(e.target.value)}
-            placeholder=" Enter Deck Description"
-            className="deck-description"
-            required
-          ></input>
-          <button type="submit" className="create-deck-button">Create</button>
+    <div className="create-page">
+      <div className="create-card accent-sky">
+        <div className="create-header">
+          <h1>Create a deck</h1>
+          <p>Group your flashcards by topic or language.</p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="create-form">
+          <label className="create-field">
+            <span>Deck name</span>
+            <input
+              value={deckName}
+              onChange={(e) => setDeckName(e.target.value)}
+              placeholder="e.g. Spanish Basics"
+              required
+            />
+          </label>
+          <label className="create-field">
+            <span>Language</span>
+            <input
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+              placeholder="e.g. Spanish"
+              required
+            />
+          </label>
+          <label className="create-field">
+            <span>Description</span>
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="What is this deck for?"
+              rows={3}
+              required
+            />
+          </label>
+
+          {message && <p className="create-message error">{message}</p>}
+
+          <div className="create-actions">
+            <Link to="/userDeck" className="create-btn secondary">
+              Cancel
+            </Link>
+            <button type="submit" className="create-btn primary">
+              Create deck
+            </button>
+          </div>
         </form>
-        {message && <p>{message}</p>}
       </div>
-    </main>
+    </div>
   );
 }
 

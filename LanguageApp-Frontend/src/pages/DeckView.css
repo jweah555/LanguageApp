@@ -72,6 +72,7 @@
 
 .deck-view-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.6rem;
 }
 
@@ -105,6 +106,19 @@
 
 .deck-view-button.secondary:hover {
   background-color: var(--dv-sky);
+}
+
+.deck-view-delete {
+  border: 2px solid #f3c4c6;
+  background-color: transparent;
+  color: #d93a40;
+  cursor: pointer;
+}
+
+.deck-view-delete:hover {
+  border-color: #e5484d;
+  background-color: #e5484d;
+  color: white;
 }
 
 .deck-view-count {

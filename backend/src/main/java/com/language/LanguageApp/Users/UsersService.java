@@ -96,13 +96,22 @@ public class UsersService {
     public Users updateUsers(Long userId, Users updatedUserData) {
         Users existingUser = usersRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User with ID " + userId + " not found"));
-        existingUser.setFirstName(updatedUserData.getFirstName());
-        existingUser.setLastName(updatedUserData.getLastName());
-        existingUser.setRole(updatedUserData.getRole());
-        existingUser.setLanguage(updatedUserData.getLanguage());
+        if (isBlank(updatedUserData.getFirstName()) || isBlank(updatedUserData.getLastName())
+                || isBlank(updatedUserData.getLanguage())) {
+            throw new BadRequestException("First name, last name and language are required");
+        }
+        existingUser.setFirstName(updatedUserData.getFirstName().trim());
+        existingUser.setLastName(updatedUserData.getLastName().trim());
+        existingUser.setLanguage(updatedUserData.getLanguage().trim());
+        // Role and username are not changed here: users shouldn't be able to promote themselves,
+        // and the username is what their login session is tied to
 
         return usersRepository.save(existingUser);
 
+    }
+
+    private boolean isBlank(String value) {
+        return value == null || value.trim().isEmpty();
     }
 
     public void deleteUsers(Long usersId) {

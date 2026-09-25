@@ -67,8 +67,9 @@ public class DeckController {
     }
 
     @DeleteMapping("/decks/{deckId}")
-    public ResponseEntity<Void> deleteById(@PathVariable("deckId") Long deckId) {
-        deckService.deleteDeck(deckId);
+    public ResponseEntity<Void> deleteById(@PathVariable("deckId") Long deckId, Authentication authentication) {
+        Users currentUser = usersService.getAuthenticatedUser(authentication);
+        deckService.deleteDeck(deckId, currentUser);
         return ResponseEntity.noContent().build();
     }
 

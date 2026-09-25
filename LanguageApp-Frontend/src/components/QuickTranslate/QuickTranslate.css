@@ -1,0 +1,246 @@
+/* ---------- Floating quick-translate widget ---------- */
+
+.quick-translate {
+  --qt-plum: #6c4ab6;
+  --qt-plum-dark: #553a93;
+  --qt-ink: #1f2a44;
+  --qt-muted: #6b7280;
+  --qt-line: #e4dcf3;
+  --qt-lilac: #efe9fb;
+
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+  font-family: "Ubuntu", sans-serif;
+}
+
+/* Round launcher button */
+.qt-fab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3.6rem;
+  height: 3.6rem;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--qt-plum);
+  color: white;
+  box-shadow: 0 8px 20px rgba(108, 74, 182, 0.4);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.qt-fab:hover {
+  background-color: var(--qt-plum-dark);
+  transform: scale(1.06);
+}
+
+.qt-fab.open {
+  background-color: var(--qt-ink);
+}
+
+.qt-fab-close {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+/* Panel */
+.qt-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  width: 22rem;
+  padding: 1rem;
+  border: 1px solid var(--qt-line);
+  border-radius: 18px;
+  background-color: white;
+  color: var(--qt-ink);
+  box-shadow: 0 16px 40px rgba(31, 42, 68, 0.2);
+  animation: qt-pop 0.15s ease-out;
+}
+
+@keyframes qt-pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.qt-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.qt-header h2 {
+  margin: 0;
+  font-family: "Raleway", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.qt-close {
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  color: var(--qt-muted);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.qt-close:hover {
+  background-color: var(--qt-lilac);
+  color: var(--qt-ink);
+}
+
+.qt-langs {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--qt-plum);
+  font-weight: 700;
+}
+
+.qt-langs select {
+  flex: 1;
+  min-width: 0;
+  padding: 0.4rem 0.5rem;
+  border: 1px solid var(--qt-line);
+  border-radius: 999px;
+  background-color: var(--qt-lilac);
+  color: var(--qt-ink);
+  font-family: "Ubuntu", sans-serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.qt-input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--qt-line);
+  border-radius: 12px;
+  background-color: white;
+  color: var(--qt-ink);
+  font-family: "Ubuntu", sans-serif;
+  font-size: 1rem;
+  resize: none;
+}
+
+.qt-input:focus {
+  outline: 2px solid var(--qt-plum);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+.qt-output {
+  min-height: 3rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 12px;
+  background-color: var(--qt-lilac);
+  font-size: 1.05rem;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.qt-placeholder {
+  color: var(--qt-muted);
+  font-size: 0.9rem;
+}
+
+.qt-error {
+  margin: 0;
+  color: #d6336c;
+  font-size: 0.85rem;
+}
+
+.qt-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.qt-btn {
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  font-family: "Overpass Mono", monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.qt-btn.primary {
+  border: 2px solid var(--qt-plum);
+  background-color: var(--qt-plum);
+  color: white;
+}
+
+.qt-btn.primary:hover:not(:disabled) {
+  border-color: var(--qt-plum-dark);
+  background-color: var(--qt-plum-dark);
+}
+
+.qt-btn.clear {
+  border: 2px solid var(--qt-line);
+  background-color: white;
+  color: var(--qt-ink);
+}
+
+.qt-btn.clear:hover {
+  background-color: var(--qt-lilac);
+}
+
+/* Save to Liked Cards sits on the left */
+.qt-btn.like {
+  margin-right: auto;
+  border: 2px solid #ff8fa3;
+  background-color: white;
+  color: #d6336c;
+}
+
+.qt-btn.like:hover:not(:disabled) {
+  background-color: #ffe3e9;
+}
+
+.qt-btn.like:disabled {
+  background-color: #ff8fa3;
+  color: white;
+  cursor: default;
+}
+
+.qt-btn:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.qt-login {
+  margin-right: auto;
+  color: var(--qt-plum);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 480px) {
+  .quick-translate {
+    right: 1rem;
+    bottom: 1rem;
+  }
+
+  .qt-panel {
+    width: calc(100vw - 2rem);
+  }
+}

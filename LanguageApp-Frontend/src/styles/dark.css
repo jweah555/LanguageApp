@@ -144,19 +144,97 @@
   background-image: radial-gradient(rgba(255, 255, 255, 0.35) 10%, transparent 11%);
 }
 
-/* ---------- Create Card / Create Deck / Profile ---------- */
+/* ---------- Create Card / Create Deck ---------- */
 
-:root[data-theme="dark"] .create-card-button,
-:root[data-theme="dark"] .create-deck-button,
-:root[data-theme="dark"] .profile-button {
-  border-color: transparent;
+:root[data-theme="dark"] .create-page {
+  --cf-muted: var(--dark-muted);
+  --cf-line: var(--dark-line);
+  background-color: var(--dark-panel);
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .create-card {
+  background-color: var(--dark-surface);
+}
+
+:root[data-theme="dark"] .create-field input,
+:root[data-theme="dark"] .create-field select,
+:root[data-theme="dark"] .create-field textarea {
+  background-color: var(--dark-surface-2);
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .create-field .create-select {
+  background-color: var(--dark-surface-2);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23e6e9f2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+:root[data-theme="dark"] .create-field .create-select:hover {
+  background-color: #2f3852;
+}
+
+:root[data-theme="dark"] .create-field .create-select option {
+  background-color: var(--dark-surface);
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .create-mode {
+  background-color: var(--dark-surface-2);
+}
+
+:root[data-theme="dark"] .create-mode button:hover {
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .create-mode button.active {
+  background-color: var(--cf-sky);
   color: #12151f;
 }
 
-:root[data-theme="dark"] .create-card-button:hover,
-:root[data-theme="dark"] .create-deck-button:hover,
-:root[data-theme="dark"] .profile-button:hover {
-  color: white;
+:root[data-theme="dark"] .create-list-row input {
+  background-color: var(--dark-surface-2);
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .create-list-row.invalid input {
+  background-color: rgba(229, 72, 77, 0.12);
+}
+
+:root[data-theme="dark"] .create-list-remove:hover {
+  background-color: rgba(229, 72, 77, 0.15);
+  color: #ff9a9d;
+}
+
+:root[data-theme="dark"] .create-add-row {
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .create-preview-face.front {
+  background-color: var(--dark-surface-2);
+}
+
+:root[data-theme="dark"] .create-preview-face.back {
+  background-color: #2b3a7a;
+}
+
+:root[data-theme="dark"] .create-message.error {
+  background-color: rgba(229, 72, 77, 0.15);
+  color: #ffb3b5;
+}
+
+:root[data-theme="dark"] .create-btn.primary {
+  border-color: var(--cf-sky);
+  background-color: var(--cf-sky);
+  color: #12151f;
+}
+
+:root[data-theme="dark"] .create-btn.secondary {
+  background-color: transparent;
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .create-btn.secondary:hover {
+  color: #12151f;
 }
 
 /* ---------- Deck page (/deckpage) ---------- */
@@ -376,5 +454,145 @@
 }
 
 :root[data-theme="dark"] .translate-save-error {
+  color: #ff9fb2;
+}
+
+/* ---------- Delete deck dialog ---------- */
+
+:root[data-theme="dark"] .delete-modal {
+  background-color: var(--dark-surface);
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .delete-modal-warning {
+  background-color: rgba(229, 72, 77, 0.15);
+  color: #ffb3b5;
+}
+
+:root[data-theme="dark"] .delete-modal-cancel {
+  border-color: var(--dark-line);
+  background-color: var(--dark-surface-2);
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .delete-modal-cancel:hover {
+  background-color: #3a4462;
+}
+
+:root[data-theme="dark"] .delete-modal-error {
+  color: #ff9a9d;
+}
+
+:root[data-theme="dark"] .deck-view-delete {
+  border-color: rgba(229, 72, 77, 0.5);
+  color: #ff9a9d;
+}
+
+:root[data-theme="dark"] .user-deck-delete {
+  border-top-color: var(--dark-line);
+  color: #ff9a9d;
+}
+
+:root[data-theme="dark"] .user-deck-delete:hover,
+:root[data-theme="dark"] .deck-view-delete:hover {
+  color: white;
+}
+
+/* ---------- Profile ---------- */
+
+:root[data-theme="dark"] .profile-page {
+  --pf-muted: var(--dark-muted);
+  --pf-line: var(--dark-line);
+  background-color: var(--dark-panel);
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .profile-avatar {
+  background-color: var(--dark-surface-2);
+}
+
+:root[data-theme="dark"] .profile-tag.language {
+  background-color: #243349;
+  color: #cfe6f7;
+}
+
+:root[data-theme="dark"] .profile-stat,
+:root[data-theme="dark"] .profile-details {
+  background-color: var(--dark-surface);
+}
+
+:root[data-theme="dark"] .profile-field input {
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .profile-field input:disabled {
+  background-color: #1b2030;
+}
+
+:root[data-theme="dark"] .profile-btn.primary {
+  border-color: var(--pf-sky);
+  background-color: var(--pf-sky);
+  color: #12151f;
+}
+
+:root[data-theme="dark"] .profile-btn.secondary {
+  background-color: transparent;
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .profile-btn.secondary:hover:not(:disabled) {
+  color: #12151f;
+}
+
+:root[data-theme="dark"] .profile-message.error {
+  background-color: rgba(229, 72, 77, 0.15);
+  color: #ffb3b5;
+}
+
+/* ---------- Quick translate widget ---------- */
+
+:root[data-theme="dark"] .quick-translate {
+  --qt-ink: var(--dark-text);
+  --qt-muted: var(--dark-muted);
+  --qt-line: var(--dark-line);
+  --qt-lilac: #231f36;
+}
+
+:root[data-theme="dark"] .qt-panel {
+  background-color: var(--dark-surface);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+:root[data-theme="dark"] .qt-langs {
+  color: #b9a3f0;
+}
+
+:root[data-theme="dark"] .qt-input {
+  background-color: var(--dark-surface-2);
+}
+
+:root[data-theme="dark"] .qt-btn.clear {
+  background-color: var(--dark-surface-2);
+}
+
+:root[data-theme="dark"] .qt-btn.like {
+  background-color: transparent;
+  color: #ff9fb2;
+}
+
+:root[data-theme="dark"] .qt-btn.like:disabled {
+  background-color: #ff8fa3;
+  color: #12151f;
+}
+
+:root[data-theme="dark"] .qt-fab.open {
+  background-color: var(--dark-surface-2);
+}
+
+:root[data-theme="dark"] .qt-login {
+  color: #b9a3f0;
+}
+
+:root[data-theme="dark"] .qt-error {
   color: #ff9fb2;
 }

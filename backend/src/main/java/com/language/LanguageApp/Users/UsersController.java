@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.deepl.api.DeepLClient;
 import com.deepl.api.TextResult;
+import com.language.LanguageApp.ForbiddenException;
 import com.language.LanguageApp.ResourceNotFoundException;
 
 import ch.qos.logback.core.model.Model;
@@ -83,18 +85,14 @@ public class UsersController {
     }
 
     @PutMapping("users/{userId}")
-    public ResponseEntity<Users> updateUserById(@PathVariable("userId") Long userId, @RequestBody Users updatedUser) {
-        Users user = usersService.getUsersById(userId);
-        if (user == null) {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<Users> updateUserById(@PathVariable("userId") Long userId, @RequestBody Users updatedUser,
+            Authentication authentication) {
+        Users currentUser = usersService.getAuthenticatedUser(authentication);
+        if (!currentUser.getUsersId().equals(userId)) {
+            throw new ForbiddenException("You can only update your own profile");
         }
-        user.setFirstName(updatedUser.getFirstName());
-        user.setLanguage(updatedUser.getLanguage());
-        user.setRole(updatedUser.getRole());
-
-        usersService.updateUsers(userId, updatedUser);
-
-        return ResponseEntity.ok(user);
+        Users savedUser = usersService.updateUsers(userId, updatedUser);
+        return ResponseEntity.ok(savedUser);
     }
 
     // @PostMapping("/register")

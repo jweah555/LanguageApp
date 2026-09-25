@@ -2,10 +2,13 @@ import "../pages/UserDeck.css";
 import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import DeleteDeckModal from "../components/DeleteDeckModal/DeleteDeckModal";
+import { deckDisplayName, isLikedDeck } from "../utils/deck";
 
 function UserDeck() {
   const { user, loading } = useAuth();
   const [decks, setDecks] = useState([]);
+  const [deckToDelete, setDeckToDelete] = useState(null);
 
   useEffect(() => {
     if (!user) return; 
@@ -61,9 +64,7 @@ function UserDeck() {
                     {deck.cards.length} {deck.cards.length === 1 ? "card" : "cards"}
                   </span>
                 </div>
-                <h2 className="user-deck-name">
-                  {deck.deckName || deck.description}
-                </h2>
+                <h2 className="user-deck-name">{deckDisplayName(deck)}</h2>
               </Link>
               <div className="user-deck-footer">
                 <Link
@@ -84,9 +85,35 @@ function UserDeck() {
                   </Link>
                 </div>
               </div>
+              {!isLikedDeck(deck) && (
+                <button
+                  type="button"
+                  className="user-deck-delete"
+                  onClick={() => setDeckToDelete(deck)}
+                >
+                  <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+                    <path
+                      fill="currentColor"
+                      d="M9 3h6l1 2h4v2H4V5h4l1-2zm-3 6h12l-1 12H7L6 9zm4 2v8h2v-8h-2zm4 0v8h2v-8h-2z"
+                    />
+                  </svg>
+                  Delete deck
+                </button>
+              )}
             </div>
           ))}
         </div>
+      )}
+
+      {deckToDelete && (
+        <DeleteDeckModal
+          deck={deckToDelete}
+          onClose={() => setDeckToDelete(null)}
+          onDeleted={(deletedId) => {
+            setDecks((current) => current.filter((d) => d.deckId !== deletedId));
+            setDeckToDelete(null);
+          }}
+        />
       )}
     </div>
   );

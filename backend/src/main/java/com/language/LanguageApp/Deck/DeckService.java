@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.language.LanguageApp.BadRequestException;
+import com.language.LanguageApp.ForbiddenException;
 import com.language.LanguageApp.ResourceNotFoundException;
 import com.language.LanguageApp.Users.Users;
 import com.language.LanguageApp.Users.UsersRepository;
@@ -65,11 +66,17 @@ public class DeckService {
        return deckRepository.findByOwner_UsersId(userId);
     }
     
-    public void deleteDeck(Long deckId) {
-        if(!deckRepository.existsById(deckId)) {
-            throw new ResourceNotFoundException("Deck with id " + deckId + "Not foound");
+    public void deleteDeck(Long deckId, Users currentUser) {
+        Deck deck = deckRepository.findById(deckId)
+                .orElseThrow(() -> new ResourceNotFoundException("Deck with id " + deckId + " not found"));
+        if (!deck.getOwner().equals(currentUser)) {
+            throw new ForbiddenException("You do not have access to this deck");
         }
-        deckRepository.deleteById(deckId);
+        // The Liked Cards deck is where translations get saved, so it has to stay
+        if (deck.isDefault()) {
+            throw new BadRequestException("Your Liked Cards deck cannot be deleted");
+        }
+        deckRepository.delete(deck);
     }
 
     

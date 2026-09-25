@@ -1,7 +1,9 @@
 import "../pages/DeckView.css";
 import { useEffect, useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import DeleteDeckModal from "../components/DeleteDeckModal/DeleteDeckModal";
+import { deckDisplayName, isLikedDeck } from "../utils/deck";
 
 function DeckView() {
   const { deckId } = useParams();
@@ -9,6 +11,8 @@ function DeckView() {
   const [deck, setDeck] = useState(null);
   const [cards, setCards] = useState([]);
   const [message, setMessage] = useState("");
+  const [confirmingDelete, setConfirmingDelete] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!user) return;
@@ -59,7 +63,7 @@ function DeckView() {
           {deck.language && (
             <span className="deck-view-language">{deck.language}</span>
           )}
-          <h1 className="deck-view-title">{deck.deckName || deck.description}</h1>
+          <h1 className="deck-view-title">{deckDisplayName(deck)}</h1>
           {deck.deckName && deck.description && (
             <p className="deck-view-description">{deck.description}</p>
           )}
@@ -72,6 +76,15 @@ function DeckView() {
             <Link to={`/userDeck/${deck.deckId}`} className="deck-view-button primary">
               Study
             </Link>
+          )}
+          {!isLikedDeck(deck) && (
+            <button
+              type="button"
+              className="deck-view-button deck-view-delete"
+              onClick={() => setConfirmingDelete(true)}
+            >
+              Delete deck
+            </button>
           )}
         </div>
       </div>
@@ -100,6 +113,14 @@ function DeckView() {
             </li>
           ))}
         </ol>
+      )}
+
+      {confirmingDelete && (
+        <DeleteDeckModal
+          deck={deck}
+          onClose={() => setConfirmingDelete(false)}
+          onDeleted={() => navigate("/userDeck", { replace: true })}
+        />
       )}
     </div>
   );
