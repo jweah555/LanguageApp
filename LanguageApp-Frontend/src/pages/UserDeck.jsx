@@ -4,6 +4,7 @@ import { Link, Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import DeleteDeckModal from "../components/DeleteDeckModal/DeleteDeckModal";
 import { deckDisplayName, isLikedDeck } from "../utils/deck";
+import { API_BASE } from "../utils/api.js";
 
 function UserDeck() {
   const { user, loading } = useAuth();
@@ -13,7 +14,7 @@ function UserDeck() {
   useEffect(() => {
     if (!user) return; 
 
-    fetch(`http://localhost:8080/decks/users/${user.usersId}`, {
+    fetch(`${API_BASE}/decks/users/${user.usersId}`, {
       credentials: "include",
     })
       .then((res) => (res.ok ? res.json() : []))

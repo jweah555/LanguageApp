@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { LANGUAGES } from "../utils/languages";
+import { API_BASE } from "../utils/api.js";
 
 function CreateDeck() {
   const { user, loading } = useAuth();
@@ -15,7 +16,7 @@ function CreateDeck() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-     const res = await fetch("http://localhost:8080/decks", {
+     const res = await fetch(`${API_BASE}/decks`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

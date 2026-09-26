@@ -4,6 +4,7 @@ import { Link, Navigate, useNavigate, useParams, useSearchParams } from "react-r
 import { useAuth } from "../context/AuthContext";
 import DeleteDeckModal from "../components/DeleteDeckModal/DeleteDeckModal";
 import { deckDisplayName, isLikedDeck } from "../utils/deck";
+import { API_BASE } from "../utils/api.js";
 
 function DeckView() {
   const { deckId } = useParams();
@@ -21,7 +22,7 @@ function DeckView() {
   useEffect(() => {
     if (!user) return;
 
-    fetch(`http://localhost:8080/decks/${deckId}`, { credentials: "include" })
+    fetch(`${API_BASE}/decks/${deckId}`, { credentials: "include" })
       .then((res) => (res.ok ? res.json() : Promise.reject()))
       .then((data) => {
         setDeck(data);

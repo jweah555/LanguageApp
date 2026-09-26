@@ -3,8 +3,7 @@ import "../pages/Review.css";
 import { useEffect, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-
-const API_BASE = "http://localhost:8080";
+import { API_BASE } from "../utils/api.js";
 
 // Left to right, worst to best; keys 1-4 pick them once the answer is showing
 const RATINGS = [

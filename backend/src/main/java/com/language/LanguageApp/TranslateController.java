@@ -4,14 +4,12 @@ import java.util.Map;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.deepl.api.DeepLClient;
 import com.deepl.api.TextResult;
 
 @RestController
-@RequestMapping("/api")
         public class TranslateController {
 
             private final DeepLClient client = new DeepLClient(System.getenv("DEEPL_API_KEY"));

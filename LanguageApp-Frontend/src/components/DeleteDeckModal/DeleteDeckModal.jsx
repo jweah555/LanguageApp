@@ -1,6 +1,7 @@
 import "./DeleteDeckModal.css";
 import { useEffect, useRef, useState } from "react";
 import { deckDisplayName } from "../../utils/deck";
+import { API_BASE } from "../../utils/api.js";
 
 function DeleteDeckModal({ deck, onClose, onDeleted }) {
   const name = deckDisplayName(deck);
@@ -27,7 +28,7 @@ function DeleteDeckModal({ deck, onClose, onDeleted }) {
     setDeleting(true);
     setError("");
     try {
-      const res = await fetch(`http://localhost:8080/decks/${deck.deckId}`, {
+      const res = await fetch(`${API_BASE}/decks/${deck.deckId}`, {
         method: "DELETE",
         credentials: "include",
       });

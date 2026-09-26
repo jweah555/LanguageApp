@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { LANGUAGES, toLanguageOption } from "../utils/languages";
-
-const API_BASE = "http://localhost:8080";
+import { API_BASE } from "../utils/api.js";
 
 function Profile() {
   const { user, loading, setUser } = useAuth();

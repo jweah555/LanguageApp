@@ -1,5 +1,5 @@
 import repeat from "../assets/images/repeat.png";
-import flashCards from "../assets/images/flashCards.png";
+import flashCards from "../assets/images/flashcards.png";
 import translation from "../assets/images/translation.png";
 import grammer from "../assets/images/grammer2.png";
 

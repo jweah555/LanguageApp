@@ -4,6 +4,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import leftArrow from "../assets/images/left-arrow.png";
 import rightArrow from "../assets/images/right-arrow.png";
+import { API_BASE } from "../utils/api.js";
 
 // How far (in px) a finger has to move sideways to count as a swipe
 const SWIPE_DISTANCE = 50;
@@ -22,7 +23,7 @@ function DeckCards() {
   useEffect(() => {
     if (!user) return;
 
-    fetch(`http://localhost:8080/decks/${deckId}`, { credentials: "include" })
+    fetch(`${API_BASE}/decks/${deckId}`, { credentials: "include" })
       .then((res) => (res.ok ? res.json() : Promise.reject()))
       .then((data) => {
         setDeck(data);

@@ -5,6 +5,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { LANGUAGES } from "../utils/languages";
+import { API_BASE } from "../utils/api.js";
 
 function LoginSignUp({ initialMode = "signup" }) {
   const [mode, setMode] = useState(initialMode);
@@ -38,7 +39,7 @@ function LoginSignUp({ initialMode = "signup" }) {
     }
     const user = { firstName, lastName, userName, password, role, language };
 
-    const response = await fetch("http://localhost:8080/users", {
+    const response = await fetch(`${API_BASE}/users`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),

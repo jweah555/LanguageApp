@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { deckDisplayName } from "../utils/deck";
-
-const API_BASE = "http://localhost:8080";
+import { API_BASE } from "../utils/api.js";
 
 export const SOURCE_LANGUAGES = [
   { value: "", label: "Detect language" },
@@ -37,7 +36,7 @@ export function useTranslator() {
     setTranslating(true);
     setError("");
     try {
-      const res = await fetch(`${API_BASE}/api/translate`, {
+      const res = await fetch(`${API_BASE}/translate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text, sourceLang, targetLang }),

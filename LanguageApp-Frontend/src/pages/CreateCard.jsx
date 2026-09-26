@@ -5,6 +5,7 @@ import { Link, Navigate } from "react-router-dom";
 import { deckDisplayName } from "../utils/deck";
 import { LANGUAGES, toLanguageOption } from "../utils/languages";
 import { useAuth } from "../context/AuthContext";
+import { API_BASE } from "../utils/api.js";
 
 // Each row in "Multiple cards" mode needs a stable id for React keys
 let nextRowId = 1;
@@ -30,7 +31,7 @@ function CreateCard() {
   useEffect(() => {
     if (!user) return;
 
-    fetch(`http://localhost:8080/decks/users/${user.usersId}`, {
+    fetch(`${API_BASE}/decks/users/${user.usersId}`, {
       credentials: "include",
     })
       .then((res) => (res.ok ? res.json() : []))
@@ -58,7 +59,7 @@ function CreateCard() {
 
   // The deck goes in the URL; the owner check uses the session cookie
   const postCard = (card) =>
-    fetch(`http://localhost:8080/card/${deckId}`, {
+    fetch(`${API_BASE}/card/${deckId}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(card),

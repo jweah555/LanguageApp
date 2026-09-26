@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { deckDisplayName } from "../utils/deck";
+import { API_BASE } from "../utils/api.js";
 
 // Practice-only view of the user's decks: study or look at cards, no editing here
 function SpacedRepetition() {
@@ -14,14 +15,14 @@ function SpacedRepetition() {
   useEffect(() => {
     if (!user) return;
 
-    fetch(`http://localhost:8080/decks/users/${user.usersId}`, {
+    fetch(`${API_BASE}/decks/users/${user.usersId}`, {
       credentials: "include",
     })
       .then((res) => (res.ok ? res.json() : []))
       .then((data) => setDecks(data))
       .catch(() => setDecks([]));
 
-    fetch("http://localhost:8080/review/summary", { credentials: "include" })
+    fetch(`${API_BASE}/review/summary`, { credentials: "include" })
       .then((res) => (res.ok ? res.json() : []))
       .then((rows) => setSummary(Object.fromEntries(rows.map((row) => [row.deckId, row]))))
       .catch(() => setSummary({}));
