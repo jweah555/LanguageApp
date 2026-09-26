@@ -74,7 +74,43 @@
   background-color: #3a4462;
 }
 
-:root[data-theme="dark"] .sub-nav a {
+:root[data-theme="dark"] .side-nav {
+  background-color: var(--dark-panel);
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .side-nav a {
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .side-nav-close,
+:root[data-theme="dark"] .side-nav-login,
+:root[data-theme="dark"] .side-nav-logout {
+  background-color: var(--dark-surface-2);
+  border-color: var(--dark-line);
+  color: var(--dark-text);
+}
+
+:root[data-theme="dark"] .side-nav a.side-nav-cta {
+  background-color: var(--dark-sky);
+  color: var(--dark-bg);
+}
+
+:root[data-theme="dark"] .side-nav-account {
+  border-top-color: var(--dark-line);
+}
+
+:root[data-theme="dark"] .side-nav ul a.active {
+  background-color: var(--dark-surface-2);
+  color: var(--dark-sky);
+}
+
+:root[data-theme="dark"] .side-nav ul a:hover,
+:root[data-theme="dark"] .side-nav-close:hover,
+:root[data-theme="dark"] .side-nav-login:hover,
+:root[data-theme="dark"] .side-nav-logout:hover,
+:root[data-theme="dark"] .side-nav-cta:hover {
+  background-color: #3a4462;
   color: var(--dark-text);
 }
 
